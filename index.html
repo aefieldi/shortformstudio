@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Original Short-Form Script Studio v3 — Visibility by Design</title>
+<title>VBD Script Studio v5 — Visibility by Design</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -12,20 +12,36 @@
   --pk400:#D4537E;--pk50:#FBEAF0;--pk200:#ED93B1;
   --t400:#1D9E75;--b600:#185FA5;--a400:#BA7517;
   --bg:#faf9ff;--surf:#ffffff;--surf2:#f4f2fd;
-  --bdr:rgba(127,119,221,0.18);--bdr2:rgba(127,119,221,0.35);
+  --bdr:rgba(127,119,221,0.18);
   --tx:#1a1730;--txs:#5c5480;--txm:#9490b8;
 }
 body{background:var(--bg);color:var(--tx);font-family:'Lato',sans-serif;min-height:100vh;padding:0 0 80px;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 15% 10%,rgba(175,169,236,0.18) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 85% 90%,rgba(212,83,126,0.08) 0%,transparent 60%);pointer-events:none;z-index:0;}
-.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 20px 60px;}
+.wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 20px 60px;}
 
-.header{text-align:center;padding:40px 16px 28px;}
-.badge{display:inline-block;background:var(--p50);border:1px solid var(--p200);color:var(--p600);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 16px;border-radius:100px;margin-bottom:16px;}
-h1{font-family:'Montserrat',sans-serif;font-size:clamp(24px,4.5vw,34px);font-weight:900;color:var(--tx);line-height:1.12;margin-bottom:10px;}
+/* HEADER */
+.header{text-align:center;padding:36px 16px 24px;}
+.badge{display:inline-block;background:var(--p50);border:1px solid var(--p200);color:var(--p600);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 16px;border-radius:100px;margin-bottom:14px;}
+h1{font-family:'Montserrat',sans-serif;font-size:clamp(22px,4.5vw,32px);font-weight:900;color:var(--tx);line-height:1.12;margin-bottom:8px;}
 h1 span{color:var(--p400);}
-.subtitle{font-size:14px;color:var(--txs);line-height:1.65;max-width:500px;margin:0 auto;font-weight:300;}
+.subtitle{font-size:13.5px;color:var(--txs);line-height:1.65;max-width:520px;margin:0 auto;font-weight:300;}
+
+/* MODE TABS */
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;}
+.mode-tab{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:16px 18px;cursor:pointer;transition:all 0.18s;text-align:left;}
+.mode-tab:hover{border-color:var(--p200);background:var(--p50);}
+.mode-tab.active{border-color:var(--p400);background:var(--p50);box-shadow:0 2px 14px rgba(127,119,221,0.14);}
+.mode-tab.active-filmed{border-color:var(--pk400);background:var(--pk50);box-shadow:0 2px 14px rgba(212,83,126,0.14);}
+.tab-icon{font-size:20px;display:block;margin-bottom:6px;}
+.tab-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;color:var(--tx);display:block;margin-bottom:3px;}
+.tab-desc{font-size:11.5px;color:var(--txs);line-height:1.4;}
+.mode-tab.active .tab-title,.mode-tab.active .tab-desc{color:var(--p600);}
+.mode-tab.active-filmed .tab-title,.mode-tab.active-filmed .tab-desc{color:var(--pk400);}
+
+/* LABELS */
 .sec-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p400);margin-bottom:10px;}
 
+/* TYPE GRID */
 .type-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:24px;}
 @media(max-width:560px){.type-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
 .type-btn{background:var(--surf);border:1px solid var(--bdr);border-radius:14px;padding:14px 8px;cursor:pointer;transition:all 0.18s;text-align:center;font-family:'Montserrat',sans-serif;}
@@ -35,16 +51,17 @@ h1 span{color:var(--p400);}
 .type-name{font-size:10px;font-weight:700;color:var(--txs);display:block;line-height:1.3;}
 .type-btn.active .type-name{color:var(--p600);}
 
+/* CARDS */
 .card{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;padding:22px;margin-bottom:12px;box-shadow:0 2px 16px rgba(127,119,221,0.06);}
 .card-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--p600);margin-bottom:4px;}
 .card-desc{font-size:13px;color:var(--txs);line-height:1.55;margin-bottom:16px;font-style:italic;}
-
 .mini-miner-banner{background:var(--pk50);border:1px solid var(--pk200);border-radius:12px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
 .mini-miner-banner p{font-size:13px;color:var(--pk400);line-height:1.5;font-style:italic;flex:1;min-width:200px;}
 .btn-mini-miner{padding:9px 18px;background:var(--pk400);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;cursor:pointer;transition:all 0.18s;white-space:nowrap;flex-shrink:0;}
 .btn-mini-miner:hover{background:#b03068;}
 
-.len-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0;}
+/* PILLS */
+.len-row{display:flex;gap:8px;flex-wrap:wrap;}
 .len-pill{padding:8px 16px;border-radius:100px;border:1px solid var(--bdr);background:var(--surf2);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--txs);cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:6px;}
 .len-pill:hover{border-color:var(--p200);color:var(--p600);background:var(--p50);}
 .len-pill.active{background:var(--p50);border-color:var(--p400);color:var(--p600);}
@@ -52,10 +69,10 @@ h1 span{color:var(--p400);}
 .len-pill.hot.active{background:var(--pk400);color:#fff;border-color:var(--pk400);}
 .len-badge{font-size:9px;background:var(--pk50);color:var(--pk400);border-radius:100px;padding:2px 7px;font-weight:700;letter-spacing:0.5px;}
 .len-pill.hot .len-badge,.len-pill.hot.active .len-badge{background:rgba(255,255,255,0.25);color:#fff;}
-
 .short-mode-tip{background:var(--pk50);border:1px solid var(--pk200);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:12.5px;color:var(--pk400);line-height:1.5;display:none;}
 .short-mode-tip.visible{display:block;}
 
+/* FIELDS */
 .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .field-full{grid-column:1/-1;}
 @media(max-width:500px){.field-grid{grid-template-columns:1fr;}}
@@ -64,30 +81,29 @@ h1 span{color:var(--p400);}
 .field-group input,.field-group textarea,.field-group select{width:100%;background:var(--surf2);border:1px solid var(--bdr);border-radius:10px;padding:10px 13px;color:var(--tx);font-family:'Lato',sans-serif;font-size:13.5px;transition:border-color 0.18s;resize:vertical;}
 .field-group input:focus,.field-group textarea:focus,.field-group select:focus{outline:none;border-color:var(--p400);background:var(--surf);}
 .field-group textarea{min-height:76px;}
-.field-group select option{background:#fff;}
 
+/* HOOKS */
 .hook-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--p600);text-transform:uppercase;display:block;margin-bottom:10px;margin-top:18px;}
 .hook-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
 .hook-pill{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Lato',sans-serif;font-size:12px;padding:5px 13px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
 .hook-pill:hover{border-color:var(--p200);color:var(--p600);background:var(--p50);}
 .hook-pill.selected{background:var(--p50);border-color:var(--p400);color:var(--p600);font-weight:700;}
-
-.opts-row{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px;}
 .tip-box{background:var(--p50);border:1px solid var(--p200);border-radius:10px;padding:11px 15px;margin-top:14px;font-size:12.5px;color:var(--p800);line-height:1.55;}
 
+/* BUTTONS */
 .gen-btn{width:100%;padding:15px;background:var(--p400);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;border:none;border-radius:14px;cursor:pointer;transition:all 0.18s;margin-top:18px;box-shadow:0 4px 20px rgba(127,119,221,0.3);}
 .gen-btn:hover{background:var(--p600);}
-.gen-btn.short-mode{background:var(--pk400);box-shadow:0 4px 20px rgba(212,83,126,0.3);}
-.gen-btn.short-mode:hover{background:#b03068;}
+.gen-btn.short-mode,.gen-btn.filmed-mode{background:var(--pk400);box-shadow:0 4px 20px rgba(212,83,126,0.3);}
+.gen-btn.short-mode:hover,.gen-btn.filmed-mode:hover{background:#b03068;}
 .gen-btn:disabled{opacity:0.5;cursor:not-allowed;box-shadow:none;}
 
+/* OUTPUT */
 .output-wrap{margin-top:32px;}
 .output-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .output-hdr h2{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--tx);}
 .copy-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;padding:6px 16px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
 .copy-btn:hover{border-color:var(--p200);color:var(--p600);}
 .copy-btn.copied{background:var(--p50);border-color:var(--p400);color:var(--p600);}
-
 .script-card{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(127,119,221,0.08);}
 .script-seg{padding:18px 22px;border-bottom:1px solid var(--bdr);}
 .script-seg:last-child{border-bottom:none;}
@@ -97,12 +113,14 @@ h1 span{color:var(--p400);}
 .repurpose-box{background:var(--surf2);border:1px solid var(--bdr);border-radius:10px;padding:12px 16px;margin-top:14px;font-size:13px;color:var(--txs);line-height:1.55;}
 .repurpose-box strong{color:var(--p600);}
 
+/* LOADING + ERROR */
 .loading-dots{display:flex;gap:7px;justify-content:center;padding:28px 0;}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--p200);animation:dotpulse 1.2s infinite;}
 .dot:nth-child(2){animation-delay:0.2s;}.dot:nth-child(3){animation-delay:0.4s;}
 @keyframes dotpulse{0%,100%{opacity:0.3;transform:scale(0.8);}50%{opacity:1;transform:scale(1);}}
 .error-box{background:#fff5f5;border:1px solid #f7c1c1;color:#a32d2d;padding:12px 16px;border-radius:10px;font-size:13px;}
 
+/* MINI MINER MODAL */
 .mini-overlay{position:fixed;inset:0;background:rgba(26,23,48,0.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
 .mini-modal{background:var(--surf);border-radius:20px;padding:28px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(26,23,48,0.2);max-height:90vh;overflow-y:auto;}
 .mini-modal h2{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;color:var(--tx);margin-bottom:6px;}
@@ -125,35 +143,91 @@ h1 span{color:var(--p400);}
 .btn-use{width:100%;padding:11px;background:var(--pk400);color:#fff;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;cursor:pointer;margin-top:10px;transition:all 0.18s;}
 .btn-use:hover{background:#b03068;}
 .btn-use:disabled{opacity:0.5;cursor:not-allowed;}
+
+/* FILMED mode */
+.filmed-card{background:var(--surf);border:1.5px solid var(--pk200);border-radius:16px;padding:22px;margin-bottom:12px;box-shadow:0 2px 16px rgba(212,83,126,0.06);}
+.filmed-tip{background:var(--pk50);border:1px solid var(--pk200);border-radius:10px;padding:11px 15px;margin-top:14px;font-size:12.5px;color:#b03068;line-height:1.55;}
+
+/* HOOK OPTION CARDS in filmed output */
+.hook-option-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:20px 22px;margin-bottom:10px;transition:border-color 0.15s;}
+.hook-option-card:hover{border-color:var(--p200);}
+.hook-num{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--txm);text-transform:uppercase;margin-bottom:10px;}
+.hook-angle-tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pk400);background:var(--pk50);border:1px solid var(--pk200);border-radius:100px;padding:2px 10px;margin-bottom:12px;}
+.hook-text{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--tx);line-height:1.25;margin-bottom:14px;}
+.caption-text{font-size:14px;color:var(--txs);line-height:1.65;margin-bottom:12px;}
+.hashtag-text{font-size:13px;color:var(--p600);font-weight:700;margin-bottom:14px;}
+.copy-hook-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;padding:6px 16px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
+.copy-hook-btn:hover{border-color:var(--p200);color:var(--p600);}
+.copy-hook-btn.copied{background:var(--p50);border-color:var(--p400);color:var(--p600);}
 </style>
 </head>
 <body>
-
 <div class="wrap">
   <div class="header">
     <div class="badge">✦ Visibility by Design · Day 4</div>
-    <h1>Original Short-Form<br><span>Script Studio</span></h1>
-    <p class="subtitle">Create brand-new Reels &amp; TikToks from your real life — hot takes, stories, patterns &amp; opinions. Same script posts to both via repurpose.io.</p>
+    <h1>Short-Form<br><span>Script Studio</span></h1>
+    <p class="subtitle">Write brand-new scripts for Reels and TikToks — or get instant hook options for a video you already filmed.</p>
   </div>
 
-  <div class="sec-label">Step 1 — Choose your content type</div>
-  <div class="type-grid" id="typeGrid">
-    <button class="type-btn active" data-type="hottake" onclick="selectType(this)"><span class="type-icon">🔥</span><span class="type-name">Hot Take</span></button>
-    <button class="type-btn" data-type="story" onclick="selectType(this)"><span class="type-icon">📖</span><span class="type-name">Personal Story</span></button>
-    <button class="type-btn" data-type="question" onclick="selectType(this)"><span class="type-icon">💬</span><span class="type-name">Client Question</span></button>
-    <button class="type-btn" data-type="pattern" onclick="selectType(this)"><span class="type-icon">👁️</span><span class="type-name">Pattern I Notice</span></button>
-    <button class="type-btn" data-type="lifestyle" onclick="selectType(this)"><span class="type-icon">🌿</span><span class="type-name">Lifestyle / BTS</span></button>
-  </div>
-
-  <div id="formArea"></div>
-
-  <div class="output-wrap" id="outputWrap" style="display:none">
-    <div class="output-hdr">
-      <h2 id="outputTitle">Your script ✦</h2>
-      <button class="copy-btn" id="copyBtn" onclick="copyAll()">Copy all</button>
+  <div class="mode-tabs">
+    <div class="mode-tab active" id="tabScript" onclick="switchMode('script')">
+      <span class="tab-icon">✍️</span>
+      <span class="tab-title">Write a New Script</span>
+      <span class="tab-desc">Create scripts from your ideas, stories, hot takes and lifestyle moments</span>
     </div>
-    <div id="scriptOut"></div>
-    <div class="repurpose-box" id="repurposeBox"><strong>Repurpose tip:</strong> Post to TikTok first, then use <strong>repurpose.io</strong> to auto-cross-post to Instagram Reels and YouTube Shorts. One shoot, three platforms.</div>
+    <div class="mode-tab" id="tabFilmed" onclick="switchMode('filmed')">
+      <span class="tab-icon">🎬</span>
+      <span class="tab-title">Already Filmed</span>
+      <span class="tab-desc">Get 5 text-on-screen hook options + captions for a video you already shot</span>
+    </div>
+  </div>
+
+  <!-- ═══ SCRIPT STUDIO PANEL ═══ -->
+  <div id="panelScript">
+    <div class="sec-label">Step 1 — Choose your content type</div>
+    <div class="type-grid" id="typeGrid">
+      <button class="type-btn active" data-type="hottake" onclick="selectType(this)"><span class="type-icon">🔥</span><span class="type-name">Hot Take</span></button>
+      <button class="type-btn" data-type="story" onclick="selectType(this)"><span class="type-icon">📖</span><span class="type-name">Personal Story</span></button>
+      <button class="type-btn" data-type="question" onclick="selectType(this)"><span class="type-icon">💬</span><span class="type-name">Client Question</span></button>
+      <button class="type-btn" data-type="pattern" onclick="selectType(this)"><span class="type-icon">👁️</span><span class="type-name">Pattern I Notice</span></button>
+      <button class="type-btn" data-type="lifestyle" onclick="selectType(this)"><span class="type-icon">🌿</span><span class="type-name">Lifestyle / BTS</span></button>
+    </div>
+    <div id="formArea"></div>
+    <div class="output-wrap" id="outputWrapScript" style="display:none">
+      <div class="output-hdr">
+        <h2 id="outputTitleScript">Your script ✦</h2>
+        <button class="copy-btn" id="copyBtnScript" onclick="copyScript()">Copy all</button>
+      </div>
+      <div id="scriptOut"></div>
+      <div class="repurpose-box" id="repurposeBox"><strong>Repurpose tip:</strong> Post to TikTok first, then use <strong>repurpose.io</strong> to auto-cross-post to Instagram Reels and YouTube Shorts. One shoot, three platforms.</div>
+    </div>
+  </div>
+
+  <!-- ═══ ALREADY FILMED PANEL ═══ -->
+  <div id="panelFilmed" style="display:none">
+    <div class="filmed-card">
+      <div class="sec-label" style="color:var(--pk400);margin-bottom:14px;">Describe your video</div>
+
+      <div class="field-group" style="margin-bottom:0;">
+        <label>What happens in the video? What is the core idea or moment?</label>
+        <textarea id="filmConcept" rows="5" placeholder="e.g. I filmed a 60-second video asking my mom how she measures quality of life — where she wants to live, what she needs nearby (good food options, bikeability, hiking, no garbage), good transport. She lists it all out. It connects to the idea of living wherever you want and designing your life around what actually matters to you."></textarea>
+      </div>
+
+      <div class="filmed-tip" style="margin-top:14px;">
+        💡 <strong>How this works:</strong> You get 5 text-on-screen hooks — each a different psychological angle (contrarian, curiosity, identity, transformation, pattern interrupt). Each comes with a punchy 1-2 sentence caption and 5 niche hashtags. Pick the one that feels right and post it.
+      </div>
+    </div>
+
+    <button class="gen-btn filmed-mode" id="genBtnFilmed" onclick="generateFilmed()">🎬 Generate my hook options</button>
+
+    <div class="output-wrap" id="outputWrapFilmed" style="display:none">
+      <div class="output-hdr">
+        <h2>Your hook options 🎬</h2>
+        <button class="copy-btn" id="copyBtnFilmed" onclick="copyAllFilmed()">Copy all</button>
+      </div>
+      <div id="filmedOut"></div>
+      <div class="repurpose-box" style="margin-top:4px;"><strong>Repurpose tip:</strong> Post TikTok first, then cross-post to Instagram Reels via <strong>repurpose.io</strong>. Test different hooks on different days to see which angle performs best.</div>
+    </div>
   </div>
 </div>
 
@@ -164,7 +238,7 @@ h1 span{color:var(--p400);}
     <p class="sub">Answer 3 quick questions and I'll surface your strongest hot takes to choose from.</p>
     <div class="mini-q">
       <label>What makes you roll your eyes in your industry?</label>
-      <div class="hint">The advice, belief, or "best practice" that makes you cringe when you see it.</div>
+      <div class="hint">The advice, belief, or best practice that makes you cringe when you see it.</div>
       <textarea id="mq1" placeholder="e.g. 'Just be consistent' — as if that helps a Projector who needs to rest..."></textarea>
     </div>
     <div class="mini-q">
@@ -186,163 +260,362 @@ h1 span{color:var(--p400);}
 </div>
 
 <script>
-const types={
-  hottake:{title:"🔥 Hot Take / Elephant in the Room",desc:"Say the thing nobody in your niche will say. The more uncomfortable it feels, the more scroll-stopping it is.",fields:[{id:"topic",label:"Your hot take or unpopular opinion",type:"textarea",placeholder:"e.g. Nobody actually needs more strategy — they need to stop watering themselves down",full:true},{id:"belief",label:"What most people believe instead",type:"input",placeholder:"e.g. Just pick a niche and stick to it"},{id:"why",label:"Why you're right (your evidence or experience)",type:"input",placeholder:"e.g. My business tanked when I stopped being myself"}],tip:"Amanda's rule: 'Name the elephant in the room — that is your moneymaker.' The more you want to delete it before posting, the better it probably is.",showMiner:true},
-  story:{title:"📖 Personal Story / Origin Moment",desc:"A real moment from your journey — a failure, a breakthrough, a pivot, a lesson learned the hard way.",fields:[{id:"story",label:"What happened (before → turning point → after)",type:"textarea",placeholder:"e.g. I paid $5k for a coach who told me to stop talking about Human Design. My business tanked in 3 months.",full:true},{id:"lesson",label:"The lesson or takeaway",type:"input",placeholder:"e.g. There is no one right way — there's only your way"},{id:"bridge",label:"How this connects to what you help people with",type:"input",placeholder:"e.g. This is why I teach aligned marketing"}],tip:"Break the story yourself before someone else does. Raw, unpolished moments outperform perfectly scripted content in 2026."},
-  question:{title:"💬 Question Clients Keep Asking",desc:"Turn the most common DMs and coaching call questions into content. If one person asked, a thousand are thinking it.",fields:[{id:"question",label:"The question clients ask you most",type:"textarea",placeholder:"e.g. How do I know what content to post when I have multiple interests?",full:true},{id:"answer",label:"Your real answer (don't be vague)",type:"textarea",placeholder:"e.g. Your multi-passion IS the niche. ManiGens aren't built for one lane.",full:true}],tip:"Generators: respond to real questions from your community — this is your strategy. When you answer what people are already asking, the sacral YES is built in."},
-  pattern:{title:"👁️ Pattern I'm Noticing",desc:"Something you keep seeing in clients, in the industry, or in your DMs. Naming patterns = authority.",fields:[{id:"pattern",label:"The pattern you're noticing",type:"textarea",placeholder:"e.g. Every Projector I work with is copying Generator content strategies and burning out by month 2",full:true},{id:"consequence",label:"What happens when people stay in this pattern",type:"input",placeholder:"e.g. They blame themselves instead of the strategy"},{id:"shift",label:"The shift or solution",type:"input",placeholder:"e.g. Projectors need premium positioning, not volume"}],tip:"Projectors — this format was made for you. You're here to see what others miss. Share the pattern. That IS the invitation."},
-  lifestyle:{title:"🌿 Lifestyle / Behind the Scenes",desc:"Your morning ritual, your workspace, your obsession, your quirks. Raw authentic life content gets MORE reach than polished tutorials in 2026.",fields:[{id:"moment",label:"The real moment or aspect of your life you want to share",type:"textarea",placeholder:"e.g. I work from a cave environment — blackout curtains, one candle, white noise",full:true},{id:"connection",label:"How this connects to your niche or audience",type:"input",placeholder:"e.g. Your HD environment type changes everything about how you create content"},{id:"curiosity",label:"What would make your audience want to comment",type:"input",placeholder:"e.g. Ask: what's YOUR environment type?"}],tip:"Adam Mosseri declared 2026 'The Year of Raw Content.' Your unfiltered morning filmed on your phone is more powerful than a studio tutorial."}
-};
+var curMode='script',curType='hottake',curLen='60',selHook=null,selectedMiniTake=null;
+var lastScriptOutput='',lastFilmedOutput='',parsedHooks=[];
 
-const hooks={
-  hottake:["What everyone gets wrong about ___","I disagree with ___","I'm tired of hearing this about ___","Ugly truth about ___","Stop doing ___ [action]","Nobody is talking about this ___","This feels illegal to know...","Your belief about ___ is why you're not getting ___"],
-  story:["How I went from ___ to ___ in ___","I paid $[X] to learn this...","The truth about my ___","I haven't done ___ in over ___ and here's why...","What I'd do differently starting from scratch","I ___ in ___ — here's how you can too"],
-  question:["5 things I wish I knew when I started...","The ___ no one is talking about","The truth about ___","This will change how you think about...","You've been doing ___ wrong your entire life","I'm going to let you in on a little secret..."],
-  pattern:["Most people assume ___","You keep doing ___ because it feels safe","___ isn't the reason you're not seeing results","Red flags to look for in ___","Everyone says ___ but ___ is what actually leads to ___","This is why your ___ isn't working"],
-  lifestyle:["This changes everything about ___","Find out how I ___ in just ___","3 ways to instantly improve ___","There's one tiny hack that creates exponential results","Nobody talks about this ___ strategy","This is your reminder to..."]
-};
-
-const lengthOptions=[
-  {value:'7',label:'7–15 sec',sub:'One-liner drop',hot:true,badge:'🔥 New'},
-  {value:'30',label:'30 sec',sub:'Punchy',hot:false,badge:''},
-  {value:'60',label:'60 sec',sub:'Standard',hot:false,badge:''},
-  {value:'90',label:'90 sec',sub:'Detailed',hot:false,badge:''},
-];
-
-let curType='hottake',selHook=null,lastOutput='',selectedMiniTake=null,curLen='60';
-
-function selectType(btn){
-  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  curType=btn.dataset.type;
-  selHook=null;
-  renderForm();
-  document.getElementById('outputWrap').style.display='none';
+// ─── API ──────────────────────────────────────────────────────────────────────
+async function callClaude(system,userMsg,maxTokens){
+  maxTokens=maxTokens||1200;
+  var res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:maxTokens,
+      system:system,
+      messages:[{role:'user',content:userMsg}]
+    })
+  });
+  if(!res.ok){
+    var err={};try{err=await res.json();}catch(x){}
+    throw new Error(err.error&&err.error.message?err.error.message:'HTTP '+res.status);
+  }
+  var data=await res.json();
+  return data.content&&data.content[0]?data.content[0].text:'';
 }
 
-function selectLen(val){
-  curLen=val;
-  document.querySelectorAll('.len-pill').forEach(p=>p.classList.remove('active'));
-  document.querySelector(`.len-pill[data-len="${val}"]`).classList.add('active');
-  const tip=document.getElementById('shortModeTip');
-  const genBtn=document.getElementById('genBtn');
-  if(val==='7'){
-    tip.classList.add('visible');
-    genBtn.classList.add('short-mode');
-    genBtn.textContent='🔥 Generate one-liner drops';
-  } else {
-    tip.classList.remove('visible');
-    genBtn.classList.remove('short-mode');
-    genBtn.textContent='✦ Generate my script';
-  }
+// ─── TYPE/HOOK DATA ───────────────────────────────────────────────────────────
+var types={
+  hottake:{title:'Hot Take / Elephant in the Room',desc:'Say the thing nobody in your niche will say. The more uncomfortable it feels, the more scroll-stopping it is.',fields:[{id:'topic',label:'Your hot take or unpopular opinion',type:'textarea',placeholder:'e.g. Nobody actually needs more strategy — they need to stop watering themselves down',full:true},{id:'belief',label:'What most people believe instead',type:'input',placeholder:'e.g. Just pick a niche and stick to it'},{id:'why',label:'Why you are right (your evidence)',type:'input',placeholder:'e.g. My business tanked when I stopped being myself'}],tip:"Name the elephant in the room — that is your moneymaker. The more you want to delete it before posting, the better it probably is.",showMiner:true},
+  story:{title:'Personal Story / Origin Moment',desc:'A real moment from your journey — a failure, a breakthrough, a pivot, a lesson learned the hard way.',fields:[{id:'story',label:'What happened (before, turning point, after)',type:'textarea',placeholder:'e.g. I paid $5k for a coach who told me to stop talking about Human Design. My business tanked in 3 months.',full:true},{id:'lesson',label:'The lesson or takeaway',type:'input',placeholder:'e.g. There is no one right way — there is only your way'},{id:'bridge',label:'How this connects to what you help people with',type:'input',placeholder:'e.g. This is why I teach aligned marketing'}],tip:'Break the story yourself before someone else does. Raw, unpolished moments outperform perfectly scripted content in 2026.'},
+  question:{title:'Question Clients Keep Asking',desc:'Turn the most common DMs and coaching call questions into content. If one person asked, a thousand are thinking it.',fields:[{id:'question',label:'The question clients ask you most',type:'textarea',placeholder:'e.g. How do I know what content to post when I have multiple interests?',full:true},{id:'answer',label:'Your real answer (do not be vague)',type:'textarea',placeholder:'e.g. Your multi-passion IS the niche.',full:true}],tip:'When you answer what people are already asking, the content practically writes itself.'},
+  pattern:{title:'Pattern I am Noticing',desc:'Something you keep seeing in clients, in the industry, or in your DMs. Naming patterns = authority.',fields:[{id:'pattern',label:'The pattern you are noticing',type:'textarea',placeholder:'e.g. Every Projector I work with is copying Generator content strategies and burning out by month 2',full:true},{id:'consequence',label:'What happens when people stay in this pattern',type:'input',placeholder:'e.g. They blame themselves instead of the strategy'},{id:'shift',label:'The shift or solution',type:'input',placeholder:'e.g. Projectors need premium positioning, not volume'}],tip:'You are here to see what others miss. Share the pattern. That IS the invitation.'},
+  lifestyle:{title:'Lifestyle / Behind the Scenes',desc:'Your morning ritual, your workspace, your obsession, your quirks. Raw authentic life content gets MORE reach than polished tutorials in 2026.',fields:[{id:'moment',label:'The real moment or aspect of your life you want to share',type:'textarea',placeholder:'e.g. I work from a cave environment — blackout curtains, one candle, white noise',full:true},{id:'connection',label:'How this connects to your niche or audience',type:'input',placeholder:'e.g. Your environment type changes everything about how you create'},{id:'curiosity',label:'What would make your audience want to comment',type:'input',placeholder:'e.g. Ask: what is YOUR environment type?'}],tip:"Adam Mosseri declared 2026 the Year of Raw Content. Your unfiltered morning filmed on your phone is more powerful than a studio tutorial."}
+};
+
+var hooks={
+  hottake:['What everyone gets wrong about ___','I disagree with ___','Ugly truth about ___','Stop doing ___ [action]','Nobody is talking about this ___','This feels illegal to know...','Your belief about ___ is why you are not getting ___'],
+  story:['How I went from ___ to ___ in ___','I paid $[X] to learn this...','The truth about my ___','What I would do differently starting from scratch'],
+  question:['5 things I wish I knew when I started...','The truth about ___','This will change how you think about...','You have been doing ___ wrong your entire life'],
+  pattern:['Most people assume ___','You keep doing ___ because it feels safe','___ is not the reason you are not seeing results','This is why your ___ is not working'],
+  lifestyle:['This changes everything about ___','Find out how I ___ in just ___','Nobody talks about this ___ strategy','This is your reminder to...']
+};
+
+var lengths=[{val:'7',label:'7-15 sec',badge:'One-liner drop',hot:true},{val:'30',label:'30 sec',badge:'Punchy'},{val:'60',label:'60 sec',badge:'Standard'},{val:'90',label:'90 sec',badge:'Detailed'}];
+
+// ─── MODE SWITCH ──────────────────────────────────────────────────────────────
+function switchMode(mode){
+  curMode=mode;
+  document.getElementById('panelScript').style.display=mode==='script'?'block':'none';
+  document.getElementById('panelFilmed').style.display=mode==='filmed'?'block':'none';
+  document.getElementById('tabScript').className='mode-tab'+(mode==='script'?' active':'');
+  document.getElementById('tabFilmed').className='mode-tab'+(mode==='filmed'?' active-filmed':'');
+}
+
+// ─── SCRIPT STUDIO ────────────────────────────────────────────────────────────
+function selectType(btn){
+  document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  curType=btn.dataset.type;selHook=null;
+  renderForm();
 }
 
 function renderForm(){
-  const t=types[curType];
-  let html='';
-  if(t.showMiner){
-    html+=`<div class="mini-miner-banner">
-      <p>Not sure what your hot take is? Let me help you find it in 3 questions.</p>
-      <button class="btn-mini-miner" onclick="openMini()">🔥 Help me find my hot take</button>
-    </div>`;
-  }
-  html+=`<div class="card">
-    <div class="card-title">${t.title}</div>
-    <div class="card-desc">${t.desc}</div>
-    <div class="field-grid">`;
-  t.fields.forEach(f=>{
-    html+=`<div class="field-group${f.full?' field-full':''}">
-      <label for="${f.id}">${f.label}</label>
-      ${f.type==='textarea'
-        ?`<textarea id="${f.id}" placeholder="${f.placeholder}"></textarea>`
-        :`<input type="text" id="${f.id}" placeholder="${f.placeholder}">`}
-    </div>`;
+  var t=types[curType];
+  var html='<div class="card"><div class="card-title">'+t.title+'</div><div class="card-desc">'+t.desc+'</div>';
+  if(t.showMiner) html+='<div class="mini-miner-banner"><p>Not sure what your hot take is? Let me surface it for you in 3 questions.</p><button class="btn-mini-miner" onclick="openMini()">Find my hot take</button></div>';
+  html+='<div class="field-grid">';
+  t.fields.forEach(function(f){
+    html+='<div class="field-group'+(f.full?' field-full':'')+'"><label>'+f.label+'</label>';
+    if(f.type==='textarea') html+='<textarea id="'+f.id+'" placeholder="'+f.placeholder+'"></textarea>';
+    else html+='<input type="text" id="'+f.id+'" placeholder="'+f.placeholder+'">';
+    html+='</div>';
   });
-  html+=`</div></div>`;
+  html+='</div></div>';
 
-  html+=`<div class="card">
-    <span class="hook-label">✦ Choose your hook style</span>
-    <div class="hook-pills" id="hookPills">
-      ${hooks[curType].map((h,i)=>`<button class="hook-pill" onclick="pickHook(this,'${i}')">${h}</button>`).join('')}
-    </div>
-    <div class="sec-label" style="margin-top:18px;margin-bottom:10px;">Video length</div>
-    <div class="len-row">
-      ${lengthOptions.map(o=>`<button class="len-pill${o.hot?' hot':''}${o.value===curLen?' active':''}" data-len="${o.value}" onclick="selectLen('${o.value}')">
-        <span>${o.label}</span>
-        <span style="font-size:10px;color:inherit;opacity:0.75;">${o.sub}</span>
-        ${o.badge?`<span class="len-badge">${o.badge}</span>`:''}
-      </button>`).join('')}
-    </div>
-    <div class="short-mode-tip${curLen==='7'?' visible':''}" id="shortModeTip">
-      ⚡ <strong>One-liner mode:</strong> I'll generate 5 variations of your hot take as punchy 7–15 second drops — one bold statement, one text overlay title, no fluff. Perfect for stitching, dueting, or posting daily. Pick your favourite and film it in 30 seconds.
-    </div>
-    <div class="opts-row">
-      <div class="field-group">
-        <label>HD type (optional)</label>
-        <select id="hdType">
-          <option value="">— Select type —</option>
-          <option>Generator</option>
-          <option>Manifesting Generator</option>
-          <option>Projector</option>
-          <option>Manifestor</option>
-          <option>Reflector</option>
-        </select>
-      </div>
-    </div>
-    <div class="tip-box">💜 ${t.tip}</div>
-  </div>`;
-
-  html+=`<button class="gen-btn${curLen==='7'?' short-mode':''}" id="genBtn" onclick="generate()">${curLen==='7'?'🔥 Generate one-liner drops':'✦ Generate my script'}</button>`;
+  html+='<div class="card"><span class="hook-label">Choose your hook style</span><div class="hook-pills">';
+  hooks[curType].forEach(function(h,i){
+    html+='<div class="hook-pill" onclick="pickHook(this,'+i+')">'+h+'</div>';
+  });
+  html+='</div><div class="sec-label" style="margin-top:0;">Video length</div><div class="len-row">';
+  lengths.forEach(function(lo){
+    var isHot=lo.hot||false;
+    var isActive=lo.val===curLen;
+    html+='<div class="len-pill'+(isHot?' hot':'')+(isActive?' active':'')+'" onclick="pickLen(this,\''+lo.val+'\')">'+lo.label+' <span class="len-badge">'+lo.badge+(isHot?' 🔥':'')+'</span></div>';
+  });
+  html+='</div><div class="short-mode-tip'+(curLen==='7'?' visible':'')+'" id="shortTip">One-liner drop mode — you get 5 variations. Film all 5 in one session, post one per day.</div>';
+  html+='<div class="tip-box">'+t.tip+'</div></div>';
+  var isShort=curLen==='7';
+  html+='<button class="gen-btn'+(isShort?' short-mode':'')+'" id="genBtn" onclick="generateScript()">'+(isShort?'🔥 Generate one-liner drops':'✦ Generate my script')+'</button>';
   document.getElementById('formArea').innerHTML=html;
 }
 
 function pickHook(btn,idx){
-  document.querySelectorAll('.hook-pill').forEach(p=>p.classList.remove('selected'));
+  document.querySelectorAll('.hook-pill').forEach(function(p){p.classList.remove('selected');});
   btn.classList.add('selected');
   selHook=hooks[curType][idx];
 }
 
-function openMini(){
-  document.getElementById('miniOverlay').style.display='flex';
-  document.getElementById('miniResults').innerHTML='';
-  selectedMiniTake=null;
+function pickLen(btn,val){
+  document.querySelectorAll('.len-pill').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  curLen=val;
+  var isShort=val==='7';
+  var tip=document.getElementById('shortTip');
+  if(tip)tip.className='short-mode-tip'+(isShort?' visible':'');
+  var gb=document.getElementById('genBtn');
+  if(gb){gb.className='gen-btn'+(isShort?' short-mode':'');gb.textContent=isShort?'🔥 Generate one-liner drops':'✦ Generate my script';}
 }
+
+async function generateScript(){
+  var t=types[curType];
+  var inputs={};var missing=false;
+  var req=['topic','story','question','answer','pattern','moment'];
+  t.fields.forEach(function(f){
+    var el=document.getElementById(f.id);
+    if(el){inputs[f.label]=el.value.trim();if(!el.value.trim()&&req.indexOf(f.id)>-1)missing=true;}
+  });
+  if(missing){
+    document.getElementById('outputWrapScript').style.display='block';
+    document.getElementById('scriptOut').innerHTML='<div class="error-box">Please fill in the required fields above before generating.</div>';
+    return;
+  }
+  var isShort=curLen==='7';
+  var gb=document.getElementById('genBtn');
+  gb.disabled=true;gb.textContent='Generating...';
+  document.getElementById('outputWrapScript').style.display='block';
+  document.getElementById('outputTitleScript').textContent=isShort?'Your one-liner drops 🔥':'Your script ✦';
+  document.getElementById('scriptOut').innerHTML='<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  document.getElementById('repurposeBox').style.display=isShort?'none':'block';
+
+  var inputSummary=Object.keys(inputs).map(function(k){return k+': '+inputs[k];}).join('\n');
+  var sys,usr;
+
+  if(isShort){
+    sys='You are a viral short-form content strategist for spiritual entrepreneurs on TikTok and Instagram Reels. Generate 7-15 second hot take drops: single bold statements, no setup, just the raw take. Under 20 spoken words. Make someone stop mid-scroll and violently agree or want to argue.';
+    usr='Based on this hot take, generate 5 variations as 7-15 second one-liner video drops.\n\n'+inputSummary+'\n\nFor each variation give EXACTLY this format with no extra text between entries:\n\nVARIATION [number]:\nSPOKEN LINE: [single bold statement under 20 words, no fluff]\nTEXT OVERLAY: [5 words max, different from spoken line]\nDELIVERY NOTE: [1 sentence on how to deliver it]\n\nMake each distinct: one confrontational, one vulnerable, one stat/fact, one question, one declarative.';
+  } else {
+    sys='You are a master short-form script writer for spiritual female entrepreneurs on TikTok and Instagram Reels. 2026 is the Year of Raw Content — raw and specific outperforms polished. First 3 seconds: visual hook + text overlay + audio hook. Conversational tone. Target '+curLen+' seconds. End with a comment-bait CTA. Max 5 niche-specific hashtags — NO #fyp #viral.';
+    var hookLine=selHook?'Use this hook style: "'+selHook+'"':'Choose the most powerful hook.';
+    usr='Create a '+curLen+'-second Reel/TikTok script.\nContent type: '+t.title+'\n'+inputSummary+'\n'+hookLine+'\n\nFormat EXACTLY:\nTEXT OVERLAY TITLE (5 words max, DIFFERENT from opening words):\n[title]\n\nHOOK — First 3 seconds:\n[hook]\n\nBODY — Core content ('+( parseInt(curLen)-15)+' seconds):\n[body]\n\nCTA — Last 5-8 seconds:\n[cta]\n\nCAPTION (2 sentences max — punchy, personal, ends with a question or engagement prompt. Then 5 niche-specific hashtags on the next line. NO #fyp #viral):\n[caption]\n\nVISUAL DIRECTION:\n[direction]';
+  }
+
+  try{
+    var text=await callClaude(sys,usr,1400);
+    lastScriptOutput=text;
+    if(isShort) renderOneLiners(text);
+    else renderScriptOutput(text);
+  }catch(e){
+    document.getElementById('scriptOut').innerHTML='<div class="error-box">Something went wrong: '+e.message+'. Please try again.</div>';
+  }
+  gb.disabled=false;gb.textContent=isShort?'🔥 Generate one-liner drops':'✦ Generate my script';
+}
+
+function renderOneLiners(text){
+  var variations=[];
+  var blocks=text.split(/VARIATION \d+:/i).filter(function(b){return b.trim();});
+  blocks.forEach(function(block){
+    var spoken=(block.match(/SPOKEN LINE:\s*([^\n]+)/i)||[])[1];
+    var overlay=(block.match(/TEXT OVERLAY:\s*([^\n]+)/i)||[])[1];
+    var delivery=(block.match(/DELIVERY NOTE:\s*([^\n]+)/i)||[])[1];
+    if(spoken) variations.push({spoken:spoken.trim(),overlay:(overlay||'').trim(),delivery:(delivery||'').trim()});
+  });
+  if(!variations.length){document.getElementById('scriptOut').innerHTML='<div class="error-box">Parsing failed. Please try again.</div>';return;}
+  var html='<div class="script-card"><div class="script-seg" style="background:var(--pk50);border-bottom:1px solid var(--pk200);"><div class="seg-label lbl-hook">5 one-liner variations — pick the one that feels most like you</div><div class="seg-text" style="font-size:12.5px;color:var(--txs);">Film all 5 in one session. Post one per day. Double down on the winner.</div></div>';
+  variations.forEach(function(v,i){
+    html+='<div class="script-seg">';
+    html+='<div class="seg-label lbl-hook" style="margin-bottom:12px;">Variation '+(i+1)+'</div>';
+    html+='<div class="seg-label lbl-oneliner">Say on camera</div><div class="seg-text" style="font-size:17px;font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:12px;">"'+v.spoken+'"</div>';
+    html+='<div class="seg-label lbl-title">Text overlay</div><div class="seg-text" style="margin-bottom:10px;">'+v.overlay+'</div>';
+    html+='<div class="seg-label lbl-visual">Delivery</div><div class="seg-text" style="font-size:13px;color:var(--txs);">'+v.delivery+'</div>';
+    html+='</div>';
+  });
+  html+='</div><div class="repurpose-box" style="margin-top:14px;"><strong>Pro tip:</strong> Film all 5 in one session — same outfit, same background. Post one every day for 5 days. <strong>Double down on the winner.</strong></div>';
+  document.getElementById('scriptOut').innerHTML=html;
+}
+
+function renderScriptOutput(text){
+  var secs=[
+    {key:'TEXT OVERLAY TITLE',label:'Text overlay title',cls:'lbl-title'},
+    {key:'HOOK',label:'Hook — first 3 seconds',cls:'lbl-hook'},
+    {key:'BODY',label:'Body — core content',cls:'lbl-body'},
+    {key:'CTA',label:'Call to action',cls:'lbl-cta'},
+    {key:'CAPTION',label:'Caption + hashtags',cls:'lbl-caption'},
+    {key:'VISUAL DIRECTION',label:'Visual direction',cls:'lbl-visual'}
+  ];
+  var html='<div class="script-card">';
+  secs.forEach(function(s){
+    var rx=new RegExp(s.key+'[^\\n]*:\\n([\\s\\S]*?)(?=\\n(?:TEXT OVERLAY TITLE|HOOK|BODY|CTA|CAPTION|VISUAL DIRECTION)[^\\n]*:|$)','i');
+    var m=text.match(rx);
+    var c=m?m[1].trim():'';
+    if(c) html+='<div class="script-seg"><div class="seg-label '+s.cls+'">'+s.label+'</div><div class="seg-text">'+c+'</div></div>';
+  });
+  html+='</div>';
+  document.getElementById('scriptOut').innerHTML=html;
+}
+
+function copyScript(){
+  if(!lastScriptOutput)return;
+  navigator.clipboard.writeText(lastScriptOutput).then(function(){
+    var b=document.getElementById('copyBtnScript');
+    b.textContent='Copied!';b.classList.add('copied');
+    setTimeout(function(){b.textContent='Copy all';b.classList.remove('copied');},2000);
+  });
+}
+
+// ─── ALREADY FILMED ───────────────────────────────────────────────────────────
+
+// Psychological angles with display labels
+var ANGLES=[
+  {key:'CONTRARIAN',label:'Contrarian'},
+  {key:'CURIOSITY',label:'Curiosity Gap'},
+  {key:'IDENTITY',label:'Identity Callout'},
+  {key:'TRANSFORMATION',label:'Transformation'},
+  {key:'PATTERN INTERRUPT',label:'Pattern Interrupt'}
+];
+
+async function generateFilmed(){
+  var concept=document.getElementById('filmConcept').value.trim();
+  if(!concept){
+    document.getElementById('outputWrapFilmed').style.display='block';
+    document.getElementById('filmedOut').innerHTML='<div class="error-box">Please describe your video first.</div>';
+    return;
+  }
+  var gb=document.getElementById('genBtnFilmed');
+  gb.disabled=true;gb.textContent='Generating...';
+  document.getElementById('outputWrapFilmed').style.display='block';
+  document.getElementById('filmedOut').innerHTML='<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+
+  var sys='You are an elite viral short-form content strategist for TikTok and Instagram Reels in 2026. Your signature move: you find the most unexpected, weirdly specific detail in a video and make it the hook — because that specificity is what stops the scroll and makes people send it to friends. The best hooks feel slightly absurd, a little unhinged, and create a gap the brain NEEDS to close. Example of great hook energy: "chicken broth reveals everything about wealth 💀" — it sounds insane until you watch. That cognitive dissonance is the goal. Generic = invisible. Weird + specific = viral. Shares via DM are the #1 ranking signal in 2026 — design every hook to make someone screenshot and send it. Instagram capped hashtags at 5, niche-specific only, NO #fyp #viral. TikTok scans on-screen text as SEO — hooks must also work as search terms.';
+
+  var usr='I have already filmed this video. Study the concept carefully and find the most unexpected, specific, slightly absurd detail buried in it — then build hooks FROM that detail, not from the general topic.\n\nVIDEO CONCEPT:\n'+concept+'\n\nStep 1 (internal only, do not output): What is the weirdest, most specific, most unexpected detail in this video that nobody would expect to be the point? Lead with that.\n\nStep 2: Write 5 text-on-screen hooks using that energy.\n\nRULES for every hook:\n- 4-5 words only (strict — count them)\n- Exactly 1 emoji\n- Sounds slightly absurd or counterintuitive out of context\n- Creates an open loop — viewer MUST watch to resolve it\n- Do NOT describe what the video shows — make them curious ABOUT it from an unexpected angle\n- Think: "what two things in this video would nobody expect to be connected?"\n\nFor each hook also write:\n- CAPTION: 1-2 sentences MAX. Punchy, casual, real — the way someone texts a friend. Ends with an emoji. Delivers the comedic punchline or the stakes.\n- HASHTAGS: exactly 5, niche-specific\n\nOutput EXACTLY this format, no preamble, no extra commentary:\n\nHOOK 1 — CONTRARIAN:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 2 — CURIOSITY:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 3 — IDENTITY:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 4 — TRANSFORMATION:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 5 — PATTERN INTERRUPT:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]';
+
+  try{
+    var text=await callClaude(sys,usr,1200);
+    lastFilmedOutput=text;
+    renderFilmedOutput(text);
+  }catch(e){
+    document.getElementById('filmedOut').innerHTML='<div class="error-box">Something went wrong: '+e.message+'. Please try again.</div>';
+  }
+  gb.disabled=false;gb.textContent='🎬 Generate my hook options';
+}
+
+function renderFilmedOutput(text){
+  parsedHooks=[];
+  // Parse each HOOK block
+  var angleKeys=ANGLES.map(function(a){return a.key;});
+
+  ANGLES.forEach(function(angle,idx){
+    // Match the block for this angle
+    var nextKey=ANGLES[idx+1]?ANGLES[idx+1].key:'$$$ENDOFSTRING$$$';
+    var rx=new RegExp('HOOK\\s*'+(idx+1)+'\\s*[—\\-]+\\s*'+angle.key+':\\s*([\\s\\S]*?)(?=HOOK\\s*'+(idx+2)+'\\s*[—\\-]|$)','i');
+    var m=text.match(rx);
+    if(!m)return;
+    var block=m[1];
+
+    // Extract hook text (first non-empty line before CAPTION:)
+    var hookLineMatch=block.match(/^([^\n]+)/);
+    var hookText=hookLineMatch?hookLineMatch[1].trim():'';
+
+    // Extract caption
+    var captionMatch=block.match(/CAPTION:\s*([^\n]+(?:\n(?!HASHTAGS:)[^\n]+)*)/i);
+    var caption=captionMatch?captionMatch[1].trim():'';
+
+    // Extract hashtags
+    var hashMatch=block.match(/HASHTAGS:\s*([^\n]+)/i);
+    var hashtags=hashMatch?hashMatch[1].trim():'';
+
+    if(hookText){
+      parsedHooks.push({angle:angle.label,hook:hookText,caption:caption,hashtags:hashtags,idx:idx});
+    }
+  });
+
+  if(!parsedHooks.length){
+    document.getElementById('filmedOut').innerHTML='<div class="error-box">Parsing failed — please try again.</div>';
+    return;
+  }
+
+  var html='';
+  parsedHooks.forEach(function(h,i){
+    var copyText=h.hook+'\n\n'+h.caption+'\n\n'+h.hashtags;
+    var safeId='hookopt'+i;
+    html+='<div class="hook-option-card">';
+    html+='<div class="hook-num">Option '+(i+1)+' of '+parsedHooks.length+'</div>';
+    html+='<div class="hook-angle-tag">'+h.angle+'</div>';
+    html+='<div class="hook-text">'+escHtml(h.hook)+'</div>';
+    if(h.caption) html+='<div class="caption-text">'+escHtml(h.caption)+'</div>';
+    if(h.hashtags) html+='<div class="hashtag-text">'+escHtml(h.hashtags)+'</div>';
+    html+='<div id="'+safeId+'" style="display:none">'+escHtml(copyText)+'</div>';
+    html+='<button class="copy-hook-btn" onclick="copyHook(\''+safeId+'\',this)">Copy this option</button>';
+    html+='</div>';
+  });
+
+  document.getElementById('filmedOut').innerHTML=html;
+}
+
+function escHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function copyHook(id,btn){
+  var el=document.getElementById(id);
+  if(!el)return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(function(){
+    var orig=btn.textContent;
+    btn.textContent='Copied!';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent=orig;btn.classList.remove('copied');},2000);
+  });
+}
+
+function copyAllFilmed(){
+  if(!lastFilmedOutput)return;
+  navigator.clipboard.writeText(lastFilmedOutput).then(function(){
+    var b=document.getElementById('copyBtnFilmed');
+    b.textContent='Copied!';b.classList.add('copied');
+    setTimeout(function(){b.textContent='Copy all';b.classList.remove('copied');},2000);
+  });
+}
+
+// ─── MINI MINER ───────────────────────────────────────────────────────────────
+function openMini(){document.getElementById('miniOverlay').style.display='flex';document.getElementById('miniResults').innerHTML='';selectedMiniTake=null;}
 function closeMini(){document.getElementById('miniOverlay').style.display='none';}
 function closeMiniIfOutside(e){if(e.target===document.getElementById('miniOverlay'))closeMini();}
 
 async function surfaceTakes(){
-  const q1=document.getElementById('mq1').value.trim();
-  const q2=document.getElementById('mq2').value.trim();
-  const q3=document.getElementById('mq3').value.trim();
+  var q1=document.getElementById('mq1').value.trim();
+  var q2=document.getElementById('mq2').value.trim();
+  var q3=document.getElementById('mq3').value.trim();
   if(!q1&&!q2&&!q3){document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Please answer at least one question.</div>';return;}
-  const btn=document.getElementById('surfaceBtn');
-  btn.disabled=true;btn.textContent='✦ Surfacing...';
+  var btn=document.getElementById('surfaceBtn');
+  btn.disabled=true;btn.textContent='Surfacing...';
   document.getElementById('miniResults').innerHTML='<div class="loading-dots" style="margin-top:16px;"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:'You are a viral content strategist for spiritual entrepreneurs. Surface 3 punchy, specific hot takes from these answers. Each take should be 1-2 bold sentences, first person, conversational. Format: TAKE 1: [text] TAKE 2: [text] TAKE 3: [text]',messages:[{role:'user',content:`Eye roll: ${q1}\nPrivate truth: ${q2}\nClient pattern: ${q3}\n\nGive me 3 hot takes I can use as Reel/TikTok content.`}]})});
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'';
-    const takes=text.match(/TAKE \d+:\s*([^\n]+(?:\n(?!TAKE \d+:)[^\n]+)*)/gi)||[];
-    const cleaned=takes.map(t=>t.replace(/TAKE \d+:\s*/i,'').trim());
+    var text=await callClaude(
+      'You are a viral content strategist for spiritual entrepreneurs. Surface 3 punchy, specific hot takes. Each take: 1-2 bold sentences, first person, conversational. Format: TAKE 1: [text] TAKE 2: [text] TAKE 3: [text]',
+      'Eye roll: '+q1+'\nPrivate truth: '+q2+'\nClient pattern: '+q3+'\n\nGive me 3 hot takes I can use as Reel/TikTok content.',
+      600
+    );
+    var takes=text.match(/TAKE \d+:\s*([^\n]+(?:\n(?!TAKE \d+:)[^\n]+)*)/gi)||[];
+    var cleaned=takes.map(function(t){return t.replace(/TAKE \d+:\s*/i,'').trim();});
     if(!cleaned.length){
-      document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Couldn\'t surface takes — try adding more detail.</div>';
-    } else {
-      let html=`<div class="take-result"><h4>✦ Pick your hot take</h4>`;
-      cleaned.forEach(t=>{
-        const safe=t.replace(/'/g,"&#39;").replace(/"/g,'&quot;');
-        html+=`<div class="take-item" data-take="${safe}" onclick="pickMiniTake(this)">${t}</div>`;
+      document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Could not surface takes — try adding more detail.</div>';
+    }else{
+      var html='<div class="take-result"><h4>Pick your hot take</h4>';
+      cleaned.forEach(function(t){
+        var safe=t.replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+        html+='<div class="take-item" data-take="'+safe+'" onclick="pickMiniTake(this)">'+t+'</div>';
       });
-      html+=`<button class="btn-use" id="useBtn" onclick="useMiniTake()" disabled>Use this take →</button></div>`;
+      html+='<button class="btn-use" id="useBtn" onclick="useMiniTake()" disabled>Use this take</button></div>';
       document.getElementById('miniResults').innerHTML=html;
     }
   }catch(e){
-    document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Something went wrong. Please try again.</div>';
+    document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Something went wrong: '+e.message+'</div>';
   }
   btn.disabled=false;btn.textContent='✦ Surface my hot takes';
 }
 
 function pickMiniTake(el){
-  document.querySelectorAll('.take-item').forEach(i=>i.classList.remove('selected'));
+  document.querySelectorAll('.take-item').forEach(function(i){i.classList.remove('selected');});
   el.classList.add('selected');
   selectedMiniTake=el.dataset.take;
   document.getElementById('useBtn').disabled=false;
@@ -350,135 +623,14 @@ function pickMiniTake(el){
 
 function useMiniTake(){
   if(!selectedMiniTake)return;
-  const topicEl=document.getElementById('topic');
+  var topicEl=document.getElementById('topic');
   if(topicEl){
     topicEl.value=selectedMiniTake;
     closeMini();
     topicEl.style.borderColor='var(--pk400)';
-    setTimeout(()=>topicEl.style.borderColor='',2000);
+    setTimeout(function(){topicEl.style.borderColor='';},2000);
     topicEl.scrollIntoView({behavior:'smooth',block:'center'});
   }
-}
-
-async function generate(){
-  const t=types[curType];
-  const inputs={};let missing=false;
-  const req=['topic','story','question','answer','pattern','moment'];
-  t.fields.forEach(f=>{
-    const el=document.getElementById(f.id);
-    if(el){
-      inputs[f.label]=el.value.trim();
-      if(!el.value.trim()&&req.includes(f.id))missing=true;
-    }
-  });
-  if(missing){
-    document.getElementById('outputWrap').style.display='block';
-    document.getElementById('scriptOut').innerHTML='<div class="error-box">Please fill in the required fields above before generating.</div>';
-    return;
-  }
-  const hd=document.getElementById('hdType').value;
-  const isShort=curLen==='7';
-  document.getElementById('genBtn').disabled=true;
-  document.getElementById('genBtn').textContent=isShort?'🔥 Generating...':'✦ Generating...';
-  document.getElementById('outputWrap').style.display='block';
-  document.getElementById('outputTitle').textContent=isShort?'Your one-liner drops 🔥':'Your script ✦';
-  document.getElementById('scriptOut').innerHTML='<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
-  document.getElementById('repurposeBox').style.display=isShort?'none':'block';
-
-  const inputSummary=Object.entries(inputs).map(([k,v])=>`${k}: ${v}`).join('\n');
-  const hdLine=hd?`Creator is a ${hd}.`:'';
-  let sys,usr;
-
-  if(isShort){
-    sys=`You are a viral short-form content strategist specialising in 7–15 second hot take drops for spiritual entrepreneurs on TikTok and Instagram Reels. These are single bold statements — no setup, no explanation, just the raw take. They should make someone stop mid-scroll and either violently agree or want to argue. Think: controversial wisdom bomb. Under 20 spoken words. The best ones could be a text-only slide with no talking. ${hdLine}`;
-    usr=`Based on this hot take, generate 5 variations as 7–15 second one-liner video drops.
-
-${inputSummary}
-
-For each variation give EXACTLY:
-VARIATION [number]:
-SPOKEN LINE: [The single bold statement they say on camera — under 20 words, no fluff]
-TEXT OVERLAY: [5 words max for the screen title — different from what they say]
-DELIVERY NOTE: [1 sentence on HOW to deliver it — energy, pace, expression]
-
-Make each variation feel distinctly different — one confrontational, one vulnerable, one stat/fact-based, one question-form, one declarative.`;
-  } else {
-    sys=`You are a master short-form video script writer for spiritual female entrepreneurs on TikTok and Instagram Reels. Write authentic, raw, scroll-stopping scripts. First 3 seconds use all 3 hooks (visual, text overlay, audio). Scripts are conversational. Target ${curLen} seconds. End with comment-bait CTA. 2026 is the Year of Raw Content. HD guidance: Projectors go deep. Generators respond. Manifestors initiate bold. MGs show range. Reflectors mirror truth. ${hdLine}`;
-    const hookLine=selHook?`Use this hook style: "${selHook}"`:'Choose the most powerful hook.';
-    usr=`Create a ${curLen}-second Reel/TikTok script.\nContent type: ${t.title}\n${inputSummary}\n${hookLine}\n\nFormat EXACTLY:\nTEXT OVERLAY TITLE (5 words max, DIFFERENT from opening words):\n[title]\n\nHOOK — First 3 seconds:\n[hook]\n\nBODY — Core content (${parseInt(curLen)-15} seconds):\n[body]\n\nCTA — Last 5-8 seconds:\n[cta]\n\nCAPTION (150-180 words, personal angle, question at end, 5-7 hashtags):\n[caption]\n\nVISUAL DIRECTION:\n[direction]`;
-  }
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:usr}]})});
-    const data=await res.json();
-    lastOutput=data.content?.[0]?.text||'';
-    isShort?renderOneLiners(lastOutput):renderScript(lastOutput);
-  }catch(e){
-    document.getElementById('scriptOut').innerHTML='<div class="error-box">Something went wrong. Please try again.</div>';
-  }
-  document.getElementById('genBtn').disabled=false;
-  document.getElementById('genBtn').textContent=isShort?'🔥 Generate one-liner drops':'✦ Generate my script';
-}
-
-function renderOneLiners(text){
-  const variations=[];
-  const blocks=text.split(/VARIATION \d+:/i).filter(b=>b.trim());
-  blocks.forEach(block=>{
-    const spoken=(block.match(/SPOKEN LINE:\s*([^\n]+)/i)||[])[1]?.trim()||'';
-    const overlay=(block.match(/TEXT OVERLAY:\s*([^\n]+)/i)||[])[1]?.trim()||'';
-    const delivery=(block.match(/DELIVERY NOTE:\s*([^\n]+)/i)||[])[1]?.trim()||'';
-    if(spoken)variations.push({spoken,overlay,delivery});
-  });
-  if(!variations.length){document.getElementById('scriptOut').innerHTML='<div class="error-box">Couldn\'t parse variations. Please try again.</div>';return;}
-  let html=`<div class="script-card">
-    <div class="script-seg" style="background:var(--pk50);border-bottom:1px solid var(--pk200);">
-      <div class="seg-label lbl-hook">5 one-liner variations — pick your favourite and film it in 30 seconds</div>
-      <div class="seg-text" style="font-size:12.5px;color:var(--txs);">Each variation is a different energy and approach. Film the one that feels most like you.</div>
-    </div>`;
-  variations.forEach((v,i)=>{
-    html+=`<div class="script-seg">
-      <div class="seg-label lbl-hook" style="margin-bottom:12px;">Variation ${i+1}</div>
-      <div class="seg-label lbl-oneliner">Say on camera</div>
-      <div class="seg-text" style="font-size:17px;font-family:'Montserrat',sans-serif;font-weight:700;margin-bottom:12px;">"${v.spoken}"</div>
-      <div class="seg-label lbl-title">Text overlay title</div>
-      <div class="seg-text" style="margin-bottom:10px;">${v.overlay}</div>
-      <div class="seg-label lbl-visual">Delivery</div>
-      <div class="seg-text" style="font-size:13px;color:var(--txs);">${v.delivery}</div>
-    </div>`;
-  });
-  html+='</div>';
-  html+=`<div class="repurpose-box" style="margin-top:14px;"><strong>Pro tip:</strong> Film all 5 in one session — same outfit, same background. Post one every day for 5 days and see which performs best. <strong>Double down on the winner.</strong></div>`;
-  document.getElementById('scriptOut').innerHTML=html;
-}
-
-function renderScript(text){
-  const secs=[
-    {key:'TEXT OVERLAY TITLE',label:'Text overlay title',cls:'lbl-title'},
-    {key:'HOOK',label:'Hook — first 3 seconds',cls:'lbl-hook'},
-    {key:'BODY',label:'Body — core content',cls:'lbl-body'},
-    {key:'CTA',label:'Call to action',cls:'lbl-cta'},
-    {key:'CAPTION',label:'Caption',cls:'lbl-caption'},
-    {key:'VISUAL DIRECTION',label:'Visual direction',cls:'lbl-visual'}
-  ];
-  let html='<div class="script-card">';
-  secs.forEach(s=>{
-    const rx=new RegExp(`${s.key}[^\\n]*:\\n([\\s\\S]*?)(?=\\n(?:TEXT OVERLAY TITLE|HOOK|BODY|CTA|CAPTION|VISUAL DIRECTION)[^\\n]*:|$)`,'i');
-    const m=text.match(rx);
-    const c=m?m[1].trim():'';
-    if(c)html+=`<div class="script-seg"><div class="seg-label ${s.cls}">${s.label}</div><div class="seg-text">${c}</div></div>`;
-  });
-  html+='</div>';
-  document.getElementById('scriptOut').innerHTML=html;
-}
-
-function copyAll(){
-  if(!lastOutput)return;
-  navigator.clipboard.writeText(lastOutput).then(()=>{
-    const b=document.getElementById('copyBtn');
-    b.textContent='✓ Copied!';
-    b.classList.add('copied');
-    setTimeout(()=>{b.textContent='Copy all';b.classList.remove('copied');},2000);
-  });
 }
 
 renderForm();

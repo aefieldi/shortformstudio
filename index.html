@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VBD Script Studio v5 — Visibility by Design</title>
+<title>VBD Script Studio v6 — Visibility by Design</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -60,17 +60,12 @@ h1 span{color:var(--p400);}
 .btn-mini-miner{padding:9px 18px;background:var(--pk400);color:#fff;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;cursor:pointer;transition:all 0.18s;white-space:nowrap;flex-shrink:0;}
 .btn-mini-miner:hover{background:#b03068;}
 
-/* PILLS */
-.len-row{display:flex;gap:8px;flex-wrap:wrap;}
-.len-pill{padding:8px 16px;border-radius:100px;border:1px solid var(--bdr);background:var(--surf2);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--txs);cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:6px;}
-.len-pill:hover{border-color:var(--p200);color:var(--p600);background:var(--p50);}
-.len-pill.active{background:var(--p50);border-color:var(--p400);color:var(--p600);}
-.len-pill.hot{border-color:var(--pk200);color:var(--pk400);background:var(--pk50);}
-.len-pill.hot.active{background:var(--pk400);color:#fff;border-color:var(--pk400);}
-.len-badge{font-size:9px;background:var(--pk50);color:var(--pk400);border-radius:100px;padding:2px 7px;font-weight:700;letter-spacing:0.5px;}
-.len-pill.hot .len-badge,.len-pill.hot.active .len-badge{background:rgba(255,255,255,0.25);color:#fff;}
-.short-mode-tip{background:var(--pk50);border:1px solid var(--pk200);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:12.5px;color:var(--pk400);line-height:1.5;display:none;}
-.short-mode-tip.visible{display:block;}
+/* AI DECIDES BANNER */
+.ai-decides{background:linear-gradient(135deg,var(--p50) 0%,var(--pk50) 100%);border:1px solid var(--p200);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
+.ai-decides-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.ai-decides-text{flex:1;}
+.ai-decides-text strong{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;color:var(--p600);text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px;}
+.ai-decides-text p{font-size:12.5px;color:var(--txs);line-height:1.5;}
 
 /* FIELDS */
 .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
@@ -82,19 +77,17 @@ h1 span{color:var(--p400);}
 .field-group input:focus,.field-group textarea:focus,.field-group select:focus{outline:none;border-color:var(--p400);background:var(--surf);}
 .field-group textarea{min-height:76px;}
 
-/* HOOKS */
-.hook-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--p600);text-transform:uppercase;display:block;margin-bottom:10px;margin-top:18px;}
-.hook-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
-.hook-pill{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Lato',sans-serif;font-size:12px;padding:5px 13px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
-.hook-pill:hover{border-color:var(--p200);color:var(--p600);background:var(--p50);}
-.hook-pill.selected{background:var(--p50);border-color:var(--p400);color:var(--p600);font-weight:700;}
+/* OPTIONAL ROW */
+.opts-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;}
+.opts-row .field-group{flex:1;min-width:180px;}
+
 .tip-box{background:var(--p50);border:1px solid var(--p200);border-radius:10px;padding:11px 15px;margin-top:14px;font-size:12.5px;color:var(--p800);line-height:1.55;}
 
 /* BUTTONS */
 .gen-btn{width:100%;padding:15px;background:var(--p400);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;border:none;border-radius:14px;cursor:pointer;transition:all 0.18s;margin-top:18px;box-shadow:0 4px 20px rgba(127,119,221,0.3);}
 .gen-btn:hover{background:var(--p600);}
-.gen-btn.short-mode,.gen-btn.filmed-mode{background:var(--pk400);box-shadow:0 4px 20px rgba(212,83,126,0.3);}
-.gen-btn.short-mode:hover,.gen-btn.filmed-mode:hover{background:#b03068;}
+.gen-btn.filmed-mode{background:var(--pk400);box-shadow:0 4px 20px rgba(212,83,126,0.3);}
+.gen-btn.filmed-mode:hover{background:#b03068;}
 .gen-btn:disabled{opacity:0.5;cursor:not-allowed;box-shadow:none;}
 
 /* OUTPUT */
@@ -105,6 +98,16 @@ h1 span{color:var(--p400);}
 .copy-btn:hover{border-color:var(--p200);color:var(--p600);}
 .copy-btn.copied{background:var(--p50);border-color:var(--p400);color:var(--p600);}
 .script-card{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(127,119,221,0.08);}
+
+/* AI STRATEGY CALLOUT */
+.strategy-pill{background:linear-gradient(135deg,var(--p50),var(--pk50));border:1px solid var(--p200);border-radius:12px;padding:14px 18px;margin-bottom:10px;}
+.strategy-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.strat-tag{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:100px;}
+.strat-tag.hook-tag{background:var(--p50);border:1px solid var(--p200);color:var(--p600);}
+.strat-tag.len-tag{background:var(--pk50);border:1px solid var(--pk200);color:var(--pk400);}
+.strat-tag.goal-tag{background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.3);color:var(--t400);}
+.strat-reason{font-size:12px;color:var(--txs);line-height:1.5;font-style:italic;}
+
 .script-seg{padding:18px 22px;border-bottom:1px solid var(--bdr);}
 .script-seg:last-child{border-bottom:none;}
 .seg-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px;}
@@ -113,12 +116,40 @@ h1 span{color:var(--p400);}
 .repurpose-box{background:var(--surf2);border:1px solid var(--bdr);border-radius:10px;padding:12px 16px;margin-top:14px;font-size:13px;color:var(--txs);line-height:1.55;}
 .repurpose-box strong{color:var(--p600);}
 
+/* ONE-LINER VARIATIONS */
+.variation-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:20px 22px;margin-bottom:10px;transition:border-color 0.15s;}
+.variation-card:hover{border-color:var(--p200);}
+.var-num{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--txm);text-transform:uppercase;margin-bottom:10px;}
+.var-flavor{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pk400);background:var(--pk50);border:1px solid var(--pk200);border-radius:100px;padding:2px 10px;margin-bottom:12px;}
+.var-spoken{font-family:'Montserrat',sans-serif;font-size:19px;font-weight:900;color:var(--tx);line-height:1.25;margin-bottom:12px;}
+.var-overlay-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;color:var(--p400);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.var-overlay{font-size:13px;color:var(--txs);margin-bottom:10px;}
+.var-delivery-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;color:var(--a400);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.var-delivery{font-size:12.5px;color:var(--txs);font-style:italic;}
+.copy-var-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;padding:6px 16px;border-radius:100px;cursor:pointer;transition:all 0.15s;margin-top:12px;}
+.copy-var-btn:hover{border-color:var(--p200);color:var(--p600);}
+.copy-var-btn.copied{background:var(--p50);border-color:var(--p400);color:var(--p600);}
+
 /* LOADING + ERROR */
 .loading-dots{display:flex;gap:7px;justify-content:center;padding:28px 0;}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--p200);animation:dotpulse 1.2s infinite;}
 .dot:nth-child(2){animation-delay:0.2s;}.dot:nth-child(3){animation-delay:0.4s;}
 @keyframes dotpulse{0%,100%{opacity:0.3;transform:scale(0.8);}50%{opacity:1;transform:scale(1);}}
 .error-box{background:#fff5f5;border:1px solid #f7c1c1;color:#a32d2d;padding:12px 16px;border-radius:10px;font-size:13px;}
+
+/* FILMED mode */
+.filmed-card{background:var(--surf);border:1.5px solid var(--pk200);border-radius:16px;padding:22px;margin-bottom:12px;box-shadow:0 2px 16px rgba(212,83,126,0.06);}
+.filmed-tip{background:var(--pk50);border:1px solid var(--pk200);border-radius:10px;padding:11px 15px;margin-top:14px;font-size:12.5px;color:#b03068;line-height:1.55;}
+.hook-option-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:20px 22px;margin-bottom:10px;transition:border-color 0.15s;}
+.hook-option-card:hover{border-color:var(--p200);}
+.hook-num{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--txm);text-transform:uppercase;margin-bottom:10px;}
+.hook-angle-tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pk400);background:var(--pk50);border:1px solid var(--pk200);border-radius:100px;padding:2px 10px;margin-bottom:12px;}
+.hook-text{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--tx);line-height:1.25;margin-bottom:14px;}
+.caption-text{font-size:14px;color:var(--txs);line-height:1.65;margin-bottom:12px;}
+.hashtag-text{font-size:13px;color:var(--p600);font-weight:700;margin-bottom:14px;}
+.copy-hook-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;padding:6px 16px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
+.copy-hook-btn:hover{border-color:var(--p200);color:var(--p600);}
+.copy-hook-btn.copied{background:var(--p50);border-color:var(--p400);color:var(--p600);}
 
 /* MINI MINER MODAL */
 .mini-overlay{position:fixed;inset:0;background:rgba(26,23,48,0.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
@@ -143,22 +174,6 @@ h1 span{color:var(--p400);}
 .btn-use{width:100%;padding:11px;background:var(--pk400);color:#fff;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;cursor:pointer;margin-top:10px;transition:all 0.18s;}
 .btn-use:hover{background:#b03068;}
 .btn-use:disabled{opacity:0.5;cursor:not-allowed;}
-
-/* FILMED mode */
-.filmed-card{background:var(--surf);border:1.5px solid var(--pk200);border-radius:16px;padding:22px;margin-bottom:12px;box-shadow:0 2px 16px rgba(212,83,126,0.06);}
-.filmed-tip{background:var(--pk50);border:1px solid var(--pk200);border-radius:10px;padding:11px 15px;margin-top:14px;font-size:12.5px;color:#b03068;line-height:1.55;}
-
-/* HOOK OPTION CARDS in filmed output */
-.hook-option-card{background:var(--surf);border:1.5px solid var(--bdr);border-radius:14px;padding:20px 22px;margin-bottom:10px;transition:border-color 0.15s;}
-.hook-option-card:hover{border-color:var(--p200);}
-.hook-num{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--txm);text-transform:uppercase;margin-bottom:10px;}
-.hook-angle-tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pk400);background:var(--pk50);border:1px solid var(--pk200);border-radius:100px;padding:2px 10px;margin-bottom:12px;}
-.hook-text{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--tx);line-height:1.25;margin-bottom:14px;}
-.caption-text{font-size:14px;color:var(--txs);line-height:1.65;margin-bottom:12px;}
-.hashtag-text{font-size:13px;color:var(--p600);font-weight:700;margin-bottom:14px;}
-.copy-hook-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--txs);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;padding:6px 16px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
-.copy-hook-btn:hover{border-color:var(--p200);color:var(--p600);}
-.copy-hook-btn.copied{background:var(--p50);border-color:var(--p400);color:var(--p600);}
 </style>
 </head>
 <body>
@@ -166,7 +181,7 @@ h1 span{color:var(--p400);}
   <div class="header">
     <div class="badge">✦ Visibility by Design · Day 4</div>
     <h1>Short-Form<br><span>Script Studio</span></h1>
-    <p class="subtitle">Write brand-new scripts for Reels and TikToks — or get instant hook options for a video you already filmed.</p>
+    <p class="subtitle">Drop your idea. The AI reads your content, picks the optimal hook style and video length, and writes your script — zero guesswork required.</p>
   </div>
 
   <div class="mode-tabs">
@@ -185,7 +200,7 @@ h1 span{color:var(--p400);}
   <!-- ═══ SCRIPT STUDIO PANEL ═══ -->
   <div id="panelScript">
     <div class="sec-label">Step 1 — Choose your content type</div>
-    <div class="type-grid" id="typeGrid">
+    <div class="type-grid">
       <button class="type-btn active" data-type="hottake" onclick="selectType(this)"><span class="type-icon">🔥</span><span class="type-name">Hot Take</span></button>
       <button class="type-btn" data-type="story" onclick="selectType(this)"><span class="type-icon">📖</span><span class="type-name">Personal Story</span></button>
       <button class="type-btn" data-type="question" onclick="selectType(this)"><span class="type-icon">💬</span><span class="type-name">Client Question</span></button>
@@ -198,6 +213,7 @@ h1 span{color:var(--p400);}
         <h2 id="outputTitleScript">Your script ✦</h2>
         <button class="copy-btn" id="copyBtnScript" onclick="copyScript()">Copy all</button>
       </div>
+      <div id="strategyDisplay"></div>
       <div id="scriptOut"></div>
       <div class="repurpose-box" id="repurposeBox"><strong>Repurpose tip:</strong> Post to TikTok first, then use <strong>repurpose.io</strong> to auto-cross-post to Instagram Reels and YouTube Shorts. One shoot, three platforms.</div>
     </div>
@@ -207,19 +223,15 @@ h1 span{color:var(--p400);}
   <div id="panelFilmed" style="display:none">
     <div class="filmed-card">
       <div class="sec-label" style="color:var(--pk400);margin-bottom:14px;">Describe your video</div>
-
-      <div class="field-group" style="margin-bottom:0;">
+      <div class="field-group">
         <label>What happens in the video? What is the core idea or moment?</label>
-        <textarea id="filmConcept" rows="5" placeholder="e.g. I filmed a 60-second video asking my mom how she measures quality of life — where she wants to live, what she needs nearby (good food options, bikeability, hiking, no garbage), good transport. She lists it all out. It connects to the idea of living wherever you want and designing your life around what actually matters to you."></textarea>
+        <textarea id="filmConcept" rows="5" placeholder="e.g. I filmed a 60-second video asking my mom how she measures quality of life — where she wants to live, what she needs nearby. She lists it all out. It connects to the idea of living wherever you want and designing your life around what actually matters."></textarea>
       </div>
-
       <div class="filmed-tip" style="margin-top:14px;">
-        💡 <strong>How this works:</strong> You get 5 text-on-screen hooks — each a different psychological angle (contrarian, curiosity, identity, transformation, pattern interrupt). Each comes with a punchy 1-2 sentence caption and 5 niche hashtags. Pick the one that feels right and post it.
+        💡 <strong>How this works:</strong> You get 5 text-on-screen hooks — each a different psychological angle. Each comes with a punchy caption and 5 niche hashtags. Pick the one that feels right and post it.
       </div>
     </div>
-
     <button class="gen-btn filmed-mode" id="genBtnFilmed" onclick="generateFilmed()">🎬 Generate my hook options</button>
-
     <div class="output-wrap" id="outputWrapFilmed" style="display:none">
       <div class="output-hdr">
         <h2>Your hook options 🎬</h2>
@@ -260,377 +272,561 @@ h1 span{color:var(--p400);}
 </div>
 
 <script>
-var curMode='script',curType='hottake',curLen='60',selHook=null,selectedMiniTake=null;
-var lastScriptOutput='',lastFilmedOutput='',parsedHooks=[];
+var curMode='script', curType='hottake', selectedMiniTake=null;
+var lastScriptOutput='', lastFilmedOutput='', parsedHooks=[];
 
 // ─── API ──────────────────────────────────────────────────────────────────────
-async function callClaude(system,userMsg,maxTokens){
-  maxTokens=maxTokens||1200;
-  var res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
-    body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:maxTokens,
-      system:system,
-      messages:[{role:'user',content:userMsg}]
+async function callClaude(system, userMsg, maxTokens) {
+  maxTokens = maxTokens || 1400;
+  var res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'anthropic-version': '2023-06-01'},
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      system: system,
+      messages: [{role: 'user', content: userMsg}]
     })
   });
-  if(!res.ok){
-    var err={};try{err=await res.json();}catch(x){}
-    throw new Error(err.error&&err.error.message?err.error.message:'HTTP '+res.status);
+  if (!res.ok) {
+    var err = {}; try { err = await res.json(); } catch(x) {}
+    throw new Error(err.error && err.error.message ? err.error.message : 'HTTP ' + res.status);
   }
-  var data=await res.json();
-  return data.content&&data.content[0]?data.content[0].text:'';
+  var data = await res.json();
+  return data.content && data.content[0] ? data.content[0].text : '';
 }
 
-// ─── TYPE/HOOK DATA ───────────────────────────────────────────────────────────
-var types={
-  hottake:{title:'Hot Take / Elephant in the Room',desc:'Say the thing nobody in your niche will say. The more uncomfortable it feels, the more scroll-stopping it is.',fields:[{id:'topic',label:'Your hot take or unpopular opinion',type:'textarea',placeholder:'e.g. Nobody actually needs more strategy — they need to stop watering themselves down',full:true},{id:'belief',label:'What most people believe instead',type:'input',placeholder:'e.g. Just pick a niche and stick to it'},{id:'why',label:'Why you are right (your evidence)',type:'input',placeholder:'e.g. My business tanked when I stopped being myself'}],tip:"Name the elephant in the room — that is your moneymaker. The more you want to delete it before posting, the better it probably is.",showMiner:true},
-  story:{title:'Personal Story / Origin Moment',desc:'A real moment from your journey — a failure, a breakthrough, a pivot, a lesson learned the hard way.',fields:[{id:'story',label:'What happened (before, turning point, after)',type:'textarea',placeholder:'e.g. I paid $5k for a coach who told me to stop talking about Human Design. My business tanked in 3 months.',full:true},{id:'lesson',label:'The lesson or takeaway',type:'input',placeholder:'e.g. There is no one right way — there is only your way'},{id:'bridge',label:'How this connects to what you help people with',type:'input',placeholder:'e.g. This is why I teach aligned marketing'}],tip:'Break the story yourself before someone else does. Raw, unpolished moments outperform perfectly scripted content in 2026.'},
-  question:{title:'Question Clients Keep Asking',desc:'Turn the most common DMs and coaching call questions into content. If one person asked, a thousand are thinking it.',fields:[{id:'question',label:'The question clients ask you most',type:'textarea',placeholder:'e.g. How do I know what content to post when I have multiple interests?',full:true},{id:'answer',label:'Your real answer (do not be vague)',type:'textarea',placeholder:'e.g. Your multi-passion IS the niche.',full:true}],tip:'When you answer what people are already asking, the content practically writes itself.'},
-  pattern:{title:'Pattern I am Noticing',desc:'Something you keep seeing in clients, in the industry, or in your DMs. Naming patterns = authority.',fields:[{id:'pattern',label:'The pattern you are noticing',type:'textarea',placeholder:'e.g. Every Projector I work with is copying Generator content strategies and burning out by month 2',full:true},{id:'consequence',label:'What happens when people stay in this pattern',type:'input',placeholder:'e.g. They blame themselves instead of the strategy'},{id:'shift',label:'The shift or solution',type:'input',placeholder:'e.g. Projectors need premium positioning, not volume'}],tip:'You are here to see what others miss. Share the pattern. That IS the invitation.'},
-  lifestyle:{title:'Lifestyle / Behind the Scenes',desc:'Your morning ritual, your workspace, your obsession, your quirks. Raw authentic life content gets MORE reach than polished tutorials in 2026.',fields:[{id:'moment',label:'The real moment or aspect of your life you want to share',type:'textarea',placeholder:'e.g. I work from a cave environment — blackout curtains, one candle, white noise',full:true},{id:'connection',label:'How this connects to your niche or audience',type:'input',placeholder:'e.g. Your environment type changes everything about how you create'},{id:'curiosity',label:'What would make your audience want to comment',type:'input',placeholder:'e.g. Ask: what is YOUR environment type?'}],tip:"Adam Mosseri declared 2026 the Year of Raw Content. Your unfiltered morning filmed on your phone is more powerful than a studio tutorial."}
+// ─── CONTENT TYPE DATA ────────────────────────────────────────────────────────
+var types = {
+  hottake: {
+    title: 'Hot Take / Elephant in the Room',
+    desc: 'Say the thing nobody in your niche will say. The more uncomfortable it feels, the more scroll-stopping it is.',
+    fields: [
+      {id: 'topic', label: 'Your hot take or unpopular opinion', type: 'textarea', placeholder: "e.g. Nobody actually needs more strategy — they need to stop watering themselves down", full: true},
+      {id: 'belief', label: 'What most people believe instead', type: 'input', placeholder: 'e.g. Just pick a niche and stick to it'},
+      {id: 'why', label: 'Why you are right (your evidence)', type: 'input', placeholder: 'e.g. My business tanked when I stopped being myself'}
+    ],
+    tip: "Name the elephant in the room — that is your moneymaker. The more you want to delete it before posting, the better it probably is.",
+    showMiner: true
+  },
+  story: {
+    title: 'Personal Story / Origin Moment',
+    desc: 'A real moment from your journey — a failure, a breakthrough, a pivot, a lesson learned the hard way.',
+    fields: [
+      {id: 'story', label: 'What happened (before, turning point, after)', type: 'textarea', placeholder: 'e.g. I paid $5k for a coach who told me to stop talking about Human Design. My business tanked in 3 months.', full: true},
+      {id: 'lesson', label: 'The lesson or takeaway', type: 'input', placeholder: "e.g. There is no one right way — there is only your way"},
+      {id: 'bridge', label: 'How this connects to what you help people with', type: 'input', placeholder: 'e.g. This is why I teach aligned marketing'}
+    ],
+    tip: 'Break the story yourself before someone else does. Raw, unpolished moments outperform perfectly scripted content in 2026.'
+  },
+  question: {
+    title: 'Question Clients Keep Asking',
+    desc: 'Turn the most common DMs and coaching call questions into content. If one person asked, a thousand are thinking it.',
+    fields: [
+      {id: 'question', label: 'The question clients ask you most', type: 'textarea', placeholder: 'e.g. How do I know what content to post when I have multiple interests?', full: true},
+      {id: 'answer', label: 'Your real answer (do not be vague)', type: 'textarea', placeholder: 'e.g. Your multi-passion IS the niche.', full: true}
+    ],
+    tip: 'When you answer what people are already asking, the content practically writes itself.'
+  },
+  pattern: {
+    title: 'Pattern I am Noticing',
+    desc: 'Something you keep seeing in clients, in the industry, or in your DMs. Naming patterns = authority.',
+    fields: [
+      {id: 'pattern', label: 'The pattern you are noticing', type: 'textarea', placeholder: 'e.g. Every Projector I work with is copying Generator content strategies and burning out by month 2', full: true},
+      {id: 'consequence', label: 'What happens when people stay in this pattern', type: 'input', placeholder: 'e.g. They blame themselves instead of the strategy'},
+      {id: 'shift', label: 'The shift or solution', type: 'input', placeholder: 'e.g. Projectors need premium positioning, not volume'}
+    ],
+    tip: 'You are here to see what others miss. Share the pattern. That IS the invitation.'
+  },
+  lifestyle: {
+    title: 'Lifestyle / Behind the Scenes',
+    desc: 'Your morning ritual, your workspace, your obsession, your quirks. Raw authentic life content gets MORE reach than polished tutorials in 2026.',
+    fields: [
+      {id: 'moment', label: 'The real moment or aspect of your life you want to share', type: 'textarea', placeholder: 'e.g. I work from a cave environment — blackout curtains, one candle, white noise', full: true},
+      {id: 'connection', label: 'How this connects to your niche or audience', type: 'input', placeholder: 'e.g. Your environment type changes everything about how you create'},
+      {id: 'curiosity', label: 'What would make your audience want to comment', type: 'input', placeholder: 'e.g. Ask: what is YOUR environment type?'}
+    ],
+    tip: "Adam Mosseri declared 2026 the Year of Raw Content. Your unfiltered morning filmed on your phone is more powerful than a studio tutorial."
+  }
 };
-
-var hooks={
-  hottake:['What everyone gets wrong about ___','I disagree with ___','Ugly truth about ___','Stop doing ___ [action]','Nobody is talking about this ___','This feels illegal to know...','Your belief about ___ is why you are not getting ___'],
-  story:['How I went from ___ to ___ in ___','I paid $[X] to learn this...','The truth about my ___','What I would do differently starting from scratch'],
-  question:['5 things I wish I knew when I started...','The truth about ___','This will change how you think about...','You have been doing ___ wrong your entire life'],
-  pattern:['Most people assume ___','You keep doing ___ because it feels safe','___ is not the reason you are not seeing results','This is why your ___ is not working'],
-  lifestyle:['This changes everything about ___','Find out how I ___ in just ___','Nobody talks about this ___ strategy','This is your reminder to...']
-};
-
-var lengths=[{val:'7',label:'7-15 sec',badge:'One-liner drop',hot:true},{val:'30',label:'30 sec',badge:'Punchy'},{val:'60',label:'60 sec',badge:'Standard'},{val:'90',label:'90 sec',badge:'Detailed'}];
 
 // ─── MODE SWITCH ──────────────────────────────────────────────────────────────
-function switchMode(mode){
-  curMode=mode;
-  document.getElementById('panelScript').style.display=mode==='script'?'block':'none';
-  document.getElementById('panelFilmed').style.display=mode==='filmed'?'block':'none';
-  document.getElementById('tabScript').className='mode-tab'+(mode==='script'?' active':'');
-  document.getElementById('tabFilmed').className='mode-tab'+(mode==='filmed'?' active-filmed':'');
+function switchMode(mode) {
+  curMode = mode;
+  document.getElementById('panelScript').style.display = mode === 'script' ? 'block' : 'none';
+  document.getElementById('panelFilmed').style.display = mode === 'filmed' ? 'block' : 'none';
+  document.getElementById('tabScript').className = 'mode-tab' + (mode === 'script' ? ' active' : '');
+  document.getElementById('tabFilmed').className = 'mode-tab' + (mode === 'filmed' ? ' active-filmed' : '');
 }
 
-// ─── SCRIPT STUDIO ────────────────────────────────────────────────────────────
-function selectType(btn){
-  document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active');});
+// ─── TYPE SELECT ──────────────────────────────────────────────────────────────
+function selectType(btn) {
+  document.querySelectorAll('.type-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
-  curType=btn.dataset.type;selHook=null;
+  curType = btn.dataset.type;
   renderForm();
 }
 
-function renderForm(){
-  var t=types[curType];
-  var html='<div class="card"><div class="card-title">'+t.title+'</div><div class="card-desc">'+t.desc+'</div>';
-  if(t.showMiner) html+='<div class="mini-miner-banner"><p>Not sure what your hot take is? Let me surface it for you in 3 questions.</p><button class="btn-mini-miner" onclick="openMini()">Find my hot take</button></div>';
-  html+='<div class="field-grid">';
-  t.fields.forEach(function(f){
-    html+='<div class="field-group'+(f.full?' field-full':'')+'"><label>'+f.label+'</label>';
-    if(f.type==='textarea') html+='<textarea id="'+f.id+'" placeholder="'+f.placeholder+'"></textarea>';
-    else html+='<input type="text" id="'+f.id+'" placeholder="'+f.placeholder+'">';
-    html+='</div>';
-  });
-  html+='</div></div>';
+// ─── RENDER FORM (no hook/length pickers) ────────────────────────────────────
+function renderForm() {
+  var t = types[curType];
+  var html = '<div class="card"><div class="card-title">' + t.title + '</div><div class="card-desc">' + t.desc + '</div>';
 
-  html+='<div class="card"><span class="hook-label">Choose your hook style</span><div class="hook-pills">';
-  hooks[curType].forEach(function(h,i){
-    html+='<div class="hook-pill" onclick="pickHook(this,'+i+')">'+h+'</div>';
+  if (t.showMiner) {
+    html += '<div class="mini-miner-banner"><p>Not sure what your hot take is? Let me surface it for you in 3 questions.</p><button class="btn-mini-miner" onclick="openMini()">Find my hot take</button></div>';
+  }
+
+  html += '<div class="field-grid">';
+  t.fields.forEach(function(f) {
+    html += '<div class="field-group' + (f.full ? ' field-full' : '') + '"><label>' + f.label + '</label>';
+    if (f.type === 'textarea') html += '<textarea id="' + f.id + '" placeholder="' + f.placeholder + '"></textarea>';
+    else html += '<input type="text" id="' + f.id + '" placeholder="' + f.placeholder + '">';
+    html += '</div>';
   });
-  html+='</div><div class="sec-label" style="margin-top:0;">Video length</div><div class="len-row">';
-  lengths.forEach(function(lo){
-    var isHot=lo.hot||false;
-    var isActive=lo.val===curLen;
-    html+='<div class="len-pill'+(isHot?' hot':'')+(isActive?' active':'')+'" onclick="pickLen(this,\''+lo.val+'\')">'+lo.label+' <span class="len-badge">'+lo.badge+(isHot?' 🔥':'')+'</span></div>';
-  });
-  html+='</div><div class="short-mode-tip'+(curLen==='7'?' visible':'')+'" id="shortTip">One-liner drop mode — you get 5 variations. Film all 5 in one session, post one per day.</div>';
-  html+='<div class="tip-box">'+t.tip+'</div></div>';
-  var isShort=curLen==='7';
-  html+='<button class="gen-btn'+(isShort?' short-mode':'')+'" id="genBtn" onclick="generateScript()">'+(isShort?'🔥 Generate one-liner drops':'✦ Generate my script')+'</button>';
-  document.getElementById('formArea').innerHTML=html;
+  html += '</div>';
+
+  // Optional HD type only
+  html += '<div class="opts-row"><div class="field-group"><label>Human Design type (optional)</label><select id="hdType"><option value="">— Select type —</option><option>Generator</option><option>Manifesting Generator</option><option>Projector</option><option>Manifestor</option><option>Reflector</option></select></div></div>';
+
+  html += '</div>';
+
+  // AI decides banner
+  html += '<div class="ai-decides"><div class="ai-decides-icon">⚡</div><div class="ai-decides-text"><strong>AI auto-selects your hook and length</strong><p>Based on your content, the AI will choose the optimal hook style, video length, and format that will perform best in 2026 — and tell you exactly why.</p></div></div>';
+
+  html += '<div class="tip-box">💜 ' + t.tip + '</div>';
+
+  html += '<button class="gen-btn" id="genBtn" onclick="generateScript()">✦ Generate my script</button>';
+
+  document.getElementById('formArea').innerHTML = html;
 }
 
-function pickHook(btn,idx){
-  document.querySelectorAll('.hook-pill').forEach(function(p){p.classList.remove('selected');});
-  btn.classList.add('selected');
-  selHook=hooks[curType][idx];
-}
+// ─── GENERATE (auto-detect everything) ───────────────────────────────────────
+async function generateScript() {
+  var t = types[curType];
+  var inputs = {};
+  var missing = false;
+  var requiredIds = ['topic', 'story', 'question', 'answer', 'pattern', 'moment'];
 
-function pickLen(btn,val){
-  document.querySelectorAll('.len-pill').forEach(function(p){p.classList.remove('active');});
-  btn.classList.add('active');
-  curLen=val;
-  var isShort=val==='7';
-  var tip=document.getElementById('shortTip');
-  if(tip)tip.className='short-mode-tip'+(isShort?' visible':'');
-  var gb=document.getElementById('genBtn');
-  if(gb){gb.className='gen-btn'+(isShort?' short-mode':'');gb.textContent=isShort?'🔥 Generate one-liner drops':'✦ Generate my script';}
-}
-
-async function generateScript(){
-  var t=types[curType];
-  var inputs={};var missing=false;
-  var req=['topic','story','question','answer','pattern','moment'];
-  t.fields.forEach(function(f){
-    var el=document.getElementById(f.id);
-    if(el){inputs[f.label]=el.value.trim();if(!el.value.trim()&&req.indexOf(f.id)>-1)missing=true;}
+  t.fields.forEach(function(f) {
+    var el = document.getElementById(f.id);
+    if (el) {
+      inputs[f.label] = el.value.trim();
+      if (!el.value.trim() && requiredIds.indexOf(f.id) > -1) missing = true;
+    }
   });
-  if(missing){
-    document.getElementById('outputWrapScript').style.display='block';
-    document.getElementById('scriptOut').innerHTML='<div class="error-box">Please fill in the required fields above before generating.</div>';
+
+  if (missing) {
+    document.getElementById('outputWrapScript').style.display = 'block';
+    document.getElementById('strategyDisplay').innerHTML = '';
+    document.getElementById('scriptOut').innerHTML = '<div class="error-box">Please fill in the required fields above before generating.</div>';
     return;
   }
-  var isShort=curLen==='7';
-  var gb=document.getElementById('genBtn');
-  gb.disabled=true;gb.textContent='Generating...';
-  document.getElementById('outputWrapScript').style.display='block';
-  document.getElementById('outputTitleScript').textContent=isShort?'Your one-liner drops 🔥':'Your script ✦';
-  document.getElementById('scriptOut').innerHTML='<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
-  document.getElementById('repurposeBox').style.display=isShort?'none':'block';
 
-  var inputSummary=Object.keys(inputs).map(function(k){return k+': '+inputs[k];}).join('\n');
-  var sys,usr;
+  var hd = document.getElementById('hdType') ? document.getElementById('hdType').value : '';
+  var hdLine = hd ? 'Creator HD type: ' + hd + '. ' : '';
 
-  if(isShort){
-    sys='You are a viral short-form content strategist for spiritual entrepreneurs on TikTok and Instagram Reels. Generate 7-15 second hot take drops: single bold statements, no setup, just the raw take. Under 20 spoken words. Make someone stop mid-scroll and violently agree or want to argue.';
-    usr='Based on this hot take, generate 5 variations as 7-15 second one-liner video drops.\n\n'+inputSummary+'\n\nFor each variation give EXACTLY this format with no extra text between entries:\n\nVARIATION [number]:\nSPOKEN LINE: [single bold statement under 20 words, no fluff]\nTEXT OVERLAY: [5 words max, different from spoken line]\nDELIVERY NOTE: [1 sentence on how to deliver it]\n\nMake each distinct: one confrontational, one vulnerable, one stat/fact, one question, one declarative.';
-  } else {
-    sys='You are a master short-form script writer for spiritual female entrepreneurs on TikTok and Instagram Reels. 2026 is the Year of Raw Content — raw and specific outperforms polished. First 3 seconds: visual hook + text overlay + audio hook. Conversational tone. Target '+curLen+' seconds. End with a comment-bait CTA. Max 5 niche-specific hashtags — NO #fyp #viral.';
-    var hookLine=selHook?'Use this hook style: "'+selHook+'"':'Choose the most powerful hook.';
-    usr='Create a '+curLen+'-second Reel/TikTok script.\nContent type: '+t.title+'\n'+inputSummary+'\n'+hookLine+'\n\nFormat EXACTLY:\nTEXT OVERLAY TITLE (5 words max, DIFFERENT from opening words):\n[title]\n\nHOOK — First 3 seconds:\n[hook]\n\nBODY — Core content ('+( parseInt(curLen)-15)+' seconds):\n[body]\n\nCTA — Last 5-8 seconds:\n[cta]\n\nCAPTION (2 sentences max — punchy, personal, ends with a question or engagement prompt. Then 5 niche-specific hashtags on the next line. NO #fyp #viral):\n[caption]\n\nVISUAL DIRECTION:\n[direction]';
+  var gb = document.getElementById('genBtn');
+  gb.disabled = true;
+  gb.textContent = 'Analysing + generating...';
+  document.getElementById('outputWrapScript').style.display = 'block';
+  document.getElementById('outputTitleScript').textContent = 'Your script ✦';
+  document.getElementById('strategyDisplay').innerHTML = '';
+  document.getElementById('scriptOut').innerHTML = '<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  document.getElementById('repurposeBox').style.display = 'block';
+
+  var inputSummary = Object.keys(inputs).map(function(k) { return k + ': ' + inputs[k]; }).join('\n');
+
+  var sys = `You are an elite viral short-form content strategist for TikTok and Instagram Reels in 2026. You have deep knowledge of what is performing right now based on the latest algorithm signals:
+
+ALGORITHM TRUTH 2026:
+- Shares via DM are the #1 ranking signal on both platforms (3x weight of likes on TikTok)
+- 70%+ completion rate required before TikTok triggers viral distribution
+- Saves > likes as a signal
+- Problem-solution hooks outperform generic advice 2:1 in engagement
+- Loss aversion hooks (STOP, DON'T, AVOID, MISTAKE) consistently outperform aspirational hooks
+- Specific curiosity gaps beat generic curiosity every time
+- "Stacking hooks" — verbal hook + text overlay from a different angle — doubles scroll-stop rate
+- Raw, specific content outperforms polished in 2026 (Year of Raw Content)
+
+VIDEO LENGTH RULES:
+- Hot takes / one-liners: 7-15 seconds — 300% retention when people loop it, perfect for discovery
+- Contrarian / myth-bust: 15-30 seconds — 92% completion rate, highest reach potential
+- Personal story / teaching: 30-45 seconds — authority building, Hook + Value + CTA structure
+- Pattern / systemic insight: 30-45 seconds — enough time to name it and shift it
+- Lifestyle / BTS with a twist: 15-30 seconds — pattern interrupt, then connect to niche
+- Client question answer: 15-30 seconds if the answer is punchy; 30-45 seconds if it needs a teaching moment
+
+HOOK HIERARCHY (what performs best in 2026):
+1. Specific Curiosity Gap — "This posting habit quietly killed my reach" (precise + personal feels)
+2. Loss Aversion — STOP / DON'T / MISTAKE / NEVER (motivated to avoid pain)
+3. Contrarian — "Everyone says X but I did the opposite" (cognitive dissonance demands resolution)
+4. Open Loop — "The one thing nobody tells you about..." (Zeigarnik effect — brain needs closure)
+5. Numbered List — creates expectation of structured value
+6. Time-Based — "How I did X in 30 days" (efficiency + proof)
+7. Question — only when it creates an information gap the brain MUST close
+
+STACK YOUR HOOKS: Verbal hook and text overlay should hit from two different angles — double the entry points, double the stop rate.
+
+${hdLine}
+
+Your output has two parts: STRATEGY (what you chose and why) and SCRIPT (the actual content).`;
+
+  var usr = `Content type: ${t.title}
+${inputSummary}
+
+Step 1 — STRATEGY DECISION (do this internally first, then output):
+Analyse the content. Determine:
+- What is the single highest-performing hook TYPE for this content (from the hierarchy)?
+- What is the optimal VIDEO LENGTH (7-15s, 15-30s, 30-45s, or 45-60s) based on what this content needs to land?
+- What is the PRIMARY GOAL of this video (Discovery/Reach, Authority Building, or Conversion)?
+- What makes this content uniquely shareable via DM — what is the "send this to a friend" factor?
+
+Step 2 — OUTPUT:
+
+First output the strategy block EXACTLY like this:
+
+STRATEGY:
+HOOK TYPE: [chosen hook type name]
+LENGTH: [e.g. 15-30 seconds]
+GOAL: [Discovery / Authority / Conversion]
+WHY: [2 sentences max — why these choices serve this specific content and its goal in 2026]
+
+Then output the script EXACTLY like this:
+
+TEXT OVERLAY TITLE (5 words max — DIFFERENT angle from your verbal hook, works as TikTok search text):
+[title]
+
+HOOK — First 3 seconds (verbal hook — stacked with the text overlay for maximum stop rate):
+[hook]
+
+BODY — Core content:
+[body — bullet points or conversational flow, specific and raw, micro-payoff every few seconds]
+
+CTA — Last 5-8 seconds (comment-bait that drives shares — ask something they will want to send to a friend OR ask them to comment a keyword):
+[cta]
+
+CAPTION (2 punchy sentences max — personal angle, ends with engagement prompt. Then 5 niche-specific hashtags that match what this video is actually about — NOT #fyp #viral):
+[caption]
+
+VISUAL DIRECTION (1-2 sentences on how to film this — environment, energy, delivery):
+[direction]`;
+
+  // Check if this is a hot take that should be one-liner drops
+  // We'll let AI decide — if it picks 7-15s we format as one-liners
+  // But first we need to get the strategy to know
+
+  try {
+    var text = await callClaude(sys, usr, 1600);
+    lastScriptOutput = text;
+
+    // Parse strategy
+    var stratMatch = text.match(/STRATEGY:\s*([\s\S]*?)(?=TEXT OVERLAY TITLE)/i);
+    var strategyBlock = stratMatch ? stratMatch[1].trim() : '';
+
+    // Check if AI chose 7-15 seconds (one-liner mode)
+    var lenMatch = strategyBlock.match(/LENGTH:\s*([^\n]+)/i);
+    var chosenLen = lenMatch ? lenMatch[1].trim().toLowerCase() : '';
+    var isOneLiner = chosenLen.includes('7') || chosenLen.includes('15') && !chosenLen.includes('30');
+
+    renderStrategyPill(strategyBlock);
+
+    if (isOneLiner) {
+      // Generate 5 one-liner variations instead
+      document.getElementById('outputTitleScript').textContent = 'Your one-liner drops 🔥';
+      document.getElementById('repurposeBox').style.display = 'none';
+      await generateOneLiners(inputs, hd, strategyBlock);
+    } else {
+      renderScriptOutput(text);
+    }
+
+  } catch(e) {
+    document.getElementById('scriptOut').innerHTML = '<div class="error-box">Something went wrong: ' + e.message + '. Please try again.</div>';
   }
 
-  try{
-    var text=await callClaude(sys,usr,1400);
-    lastScriptOutput=text;
-    if(isShort) renderOneLiners(text);
-    else renderScriptOutput(text);
-  }catch(e){
-    document.getElementById('scriptOut').innerHTML='<div class="error-box">Something went wrong: '+e.message+'. Please try again.</div>';
+  gb.disabled = false;
+  gb.textContent = '✦ Generate my script';
+}
+
+async function generateOneLiners(inputs, hd, strategyBlock) {
+  var hdLine = hd ? 'Creator HD type: ' + hd + '.' : '';
+  var inputSummary = Object.keys(inputs).map(function(k) { return k + ': ' + inputs[k]; }).join('\n');
+
+  var sys = 'You are a viral short-form content strategist for spiritual entrepreneurs on TikTok and Instagram Reels. Generate 7-15 second hot take drops: single bold statements, no setup, just the raw take. Under 20 spoken words. Make someone stop mid-scroll and violently agree or want to argue. ' + hdLine;
+  var usr = 'Based on this content, generate 5 variations as 7-15 second one-liner video drops.\n\n' + inputSummary + '\n\nFor each variation give EXACTLY:\n\nVARIATION [number]:\nFLAVOR: [one word: Confrontational / Vulnerable / Stat-based / Question / Declarative]\nSPOKEN LINE: [single bold statement under 20 words, no fluff]\nTEXT OVERLAY: [5 words max — different angle from spoken line, works as TikTok search]\nDELIVERY NOTE: [1 sentence on energy, pace, expression]\n\nMake each distinctly different.';
+
+  document.getElementById('scriptOut').innerHTML = '<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+
+  try {
+    var text = await callClaude(sys, usr, 1000);
+    renderOneLiners(text);
+  } catch(e) {
+    document.getElementById('scriptOut').innerHTML = '<div class="error-box">Something went wrong generating one-liners: ' + e.message + '</div>';
   }
-  gb.disabled=false;gb.textContent=isShort?'🔥 Generate one-liner drops':'✦ Generate my script';
 }
 
-function renderOneLiners(text){
-  var variations=[];
-  var blocks=text.split(/VARIATION \d+:/i).filter(function(b){return b.trim();});
-  blocks.forEach(function(block){
-    var spoken=(block.match(/SPOKEN LINE:\s*([^\n]+)/i)||[])[1];
-    var overlay=(block.match(/TEXT OVERLAY:\s*([^\n]+)/i)||[])[1];
-    var delivery=(block.match(/DELIVERY NOTE:\s*([^\n]+)/i)||[])[1];
-    if(spoken) variations.push({spoken:spoken.trim(),overlay:(overlay||'').trim(),delivery:(delivery||'').trim()});
-  });
-  if(!variations.length){document.getElementById('scriptOut').innerHTML='<div class="error-box">Parsing failed. Please try again.</div>';return;}
-  var html='<div class="script-card"><div class="script-seg" style="background:var(--pk50);border-bottom:1px solid var(--pk200);"><div class="seg-label lbl-hook">5 one-liner variations — pick the one that feels most like you</div><div class="seg-text" style="font-size:12.5px;color:var(--txs);">Film all 5 in one session. Post one per day. Double down on the winner.</div></div>';
-  variations.forEach(function(v,i){
-    html+='<div class="script-seg">';
-    html+='<div class="seg-label lbl-hook" style="margin-bottom:12px;">Variation '+(i+1)+'</div>';
-    html+='<div class="seg-label lbl-oneliner">Say on camera</div><div class="seg-text" style="font-size:17px;font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:12px;">"'+v.spoken+'"</div>';
-    html+='<div class="seg-label lbl-title">Text overlay</div><div class="seg-text" style="margin-bottom:10px;">'+v.overlay+'</div>';
-    html+='<div class="seg-label lbl-visual">Delivery</div><div class="seg-text" style="font-size:13px;color:var(--txs);">'+v.delivery+'</div>';
-    html+='</div>';
-  });
-  html+='</div><div class="repurpose-box" style="margin-top:14px;"><strong>Pro tip:</strong> Film all 5 in one session — same outfit, same background. Post one every day for 5 days. <strong>Double down on the winner.</strong></div>';
-  document.getElementById('scriptOut').innerHTML=html;
+// ─── RENDER STRATEGY PILL ─────────────────────────────────────────────────────
+function renderStrategyPill(strategyBlock) {
+  if (!strategyBlock) return;
+
+  var hookMatch = strategyBlock.match(/HOOK TYPE:\s*([^\n]+)/i);
+  var lenMatch = strategyBlock.match(/LENGTH:\s*([^\n]+)/i);
+  var goalMatch = strategyBlock.match(/GOAL:\s*([^\n]+)/i);
+  var whyMatch = strategyBlock.match(/WHY:\s*([\s\S]+)/i);
+
+  var hook = hookMatch ? hookMatch[1].trim() : '';
+  var len = lenMatch ? lenMatch[1].trim() : '';
+  var goal = goalMatch ? goalMatch[1].trim() : '';
+  var why = whyMatch ? whyMatch[1].trim() : '';
+
+  if (!hook && !len) return;
+
+  var html = '<div class="strategy-pill">';
+  html += '<div class="strategy-row">';
+  if (hook) html += '<span class="strat-tag hook-tag">⚡ Hook: ' + escHtml(hook) + '</span>';
+  if (len) html += '<span class="strat-tag len-tag">⏱ ' + escHtml(len) + '</span>';
+  if (goal) html += '<span class="strat-tag goal-tag">🎯 ' + escHtml(goal) + '</span>';
+  html += '</div>';
+  if (why) html += '<div class="strat-reason">' + escHtml(why) + '</div>';
+  html += '</div>';
+
+  document.getElementById('strategyDisplay').innerHTML = html;
 }
 
-function renderScriptOutput(text){
-  var secs=[
-    {key:'TEXT OVERLAY TITLE',label:'Text overlay title',cls:'lbl-title'},
-    {key:'HOOK',label:'Hook — first 3 seconds',cls:'lbl-hook'},
-    {key:'BODY',label:'Body — core content',cls:'lbl-body'},
-    {key:'CTA',label:'Call to action',cls:'lbl-cta'},
-    {key:'CAPTION',label:'Caption + hashtags',cls:'lbl-caption'},
-    {key:'VISUAL DIRECTION',label:'Visual direction',cls:'lbl-visual'}
+// ─── RENDER SCRIPT OUTPUT ─────────────────────────────────────────────────────
+function renderScriptOutput(text) {
+  var secs = [
+    {key: 'TEXT OVERLAY TITLE', label: 'Text overlay title', cls: 'lbl-title'},
+    {key: 'HOOK', label: 'Hook — first 3 seconds', cls: 'lbl-hook'},
+    {key: 'BODY', label: 'Body — core content', cls: 'lbl-body'},
+    {key: 'CTA', label: 'Call to action', cls: 'lbl-cta'},
+    {key: 'CAPTION', label: 'Caption + hashtags', cls: 'lbl-caption'},
+    {key: 'VISUAL DIRECTION', label: 'Visual direction', cls: 'lbl-visual'}
   ];
-  var html='<div class="script-card">';
-  secs.forEach(function(s){
-    var rx=new RegExp(s.key+'[^\\n]*:\\n([\\s\\S]*?)(?=\\n(?:TEXT OVERLAY TITLE|HOOK|BODY|CTA|CAPTION|VISUAL DIRECTION)[^\\n]*:|$)','i');
-    var m=text.match(rx);
-    var c=m?m[1].trim():'';
-    if(c) html+='<div class="script-seg"><div class="seg-label '+s.cls+'">'+s.label+'</div><div class="seg-text">'+c+'</div></div>';
+
+  var html = '<div class="script-card">';
+  secs.forEach(function(s) {
+    var rx = new RegExp(s.key + '[^\\n]*:\\n([\\s\\S]*?)(?=\\n(?:TEXT OVERLAY TITLE|HOOK|BODY|CTA|CAPTION|VISUAL DIRECTION)[^\\n]*:|$)', 'i');
+    var m = text.match(rx);
+    var c = m ? m[1].trim() : '';
+    if (c) html += '<div class="script-seg"><div class="seg-label ' + s.cls + '">' + s.label + '</div><div class="seg-text">' + escHtml(c) + '</div></div>';
   });
-  html+='</div>';
-  document.getElementById('scriptOut').innerHTML=html;
+  html += '</div>';
+  document.getElementById('scriptOut').innerHTML = html;
 }
 
-function copyScript(){
-  if(!lastScriptOutput)return;
-  navigator.clipboard.writeText(lastScriptOutput).then(function(){
-    var b=document.getElementById('copyBtnScript');
-    b.textContent='Copied!';b.classList.add('copied');
-    setTimeout(function(){b.textContent='Copy all';b.classList.remove('copied');},2000);
+// ─── RENDER ONE-LINERS ────────────────────────────────────────────────────────
+function renderOneLiners(text) {
+  var blocks = text.split(/VARIATION \d+:/i).filter(function(b) { return b.trim(); });
+  var variations = [];
+
+  blocks.forEach(function(block) {
+    var flavor = (block.match(/FLAVOR:\s*([^\n]+)/i) || [])[1];
+    var spoken = (block.match(/SPOKEN LINE:\s*([^\n]+)/i) || [])[1];
+    var overlay = (block.match(/TEXT OVERLAY:\s*([^\n]+)/i) || [])[1];
+    var delivery = (block.match(/DELIVERY NOTE:\s*([^\n]+)/i) || [])[1];
+    if (spoken) variations.push({
+      flavor: (flavor || '').trim(),
+      spoken: spoken.trim(),
+      overlay: (overlay || '').trim(),
+      delivery: (delivery || '').trim()
+    });
+  });
+
+  if (!variations.length) {
+    document.getElementById('scriptOut').innerHTML = '<div class="error-box">Parsing failed — please try again.</div>';
+    return;
+  }
+
+  var html = '<div style="margin-bottom:8px;font-size:12.5px;color:var(--txs);font-style:italic;">Film all 5 in one session. Post one per day. Double down on the winner.</div>';
+
+  variations.forEach(function(v, i) {
+    var copyId = 'varCopy' + i;
+    var copyText = '"' + v.spoken + '"\n\nText overlay: ' + v.overlay + '\n\nDelivery: ' + v.delivery;
+    html += '<div class="variation-card">';
+    html += '<div class="var-num">Variation ' + (i + 1) + ' of ' + variations.length + '</div>';
+    if (v.flavor) html += '<span class="var-flavor">' + escHtml(v.flavor) + '</span>';
+    html += '<div class="var-spoken">"' + escHtml(v.spoken) + '"</div>';
+    html += '<div class="var-overlay-label">Text overlay</div><div class="var-overlay">' + escHtml(v.overlay) + '</div>';
+    html += '<div class="var-delivery-label">Delivery</div><div class="var-delivery">' + escHtml(v.delivery) + '</div>';
+    html += '<div id="' + copyId + '" style="display:none">' + escHtml(copyText) + '</div>';
+    html += '<button class="copy-var-btn" onclick="copyVar(\'' + copyId + '\',this)">Copy this variation</button>';
+    html += '</div>';
+  });
+
+  document.getElementById('scriptOut').innerHTML = html;
+}
+
+// ─── COPY FUNCTIONS ───────────────────────────────────────────────────────────
+function copyScript() {
+  if (!lastScriptOutput) return;
+  navigator.clipboard.writeText(lastScriptOutput).then(function() {
+    var b = document.getElementById('copyBtnScript');
+    b.textContent = 'Copied!'; b.classList.add('copied');
+    setTimeout(function() { b.textContent = 'Copy all'; b.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyVar(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!'; btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
   });
 }
 
 // ─── ALREADY FILMED ───────────────────────────────────────────────────────────
-
-// Psychological angles with display labels
-var ANGLES=[
-  {key:'CONTRARIAN',label:'Contrarian'},
-  {key:'CURIOSITY',label:'Curiosity Gap'},
-  {key:'IDENTITY',label:'Identity Callout'},
-  {key:'TRANSFORMATION',label:'Transformation'},
-  {key:'PATTERN INTERRUPT',label:'Pattern Interrupt'}
+var ANGLES = [
+  {key: 'CONTRARIAN', label: 'Contrarian'},
+  {key: 'CURIOSITY', label: 'Curiosity Gap'},
+  {key: 'IDENTITY', label: 'Identity Callout'},
+  {key: 'TRANSFORMATION', label: 'Transformation'},
+  {key: 'PATTERN INTERRUPT', label: 'Pattern Interrupt'}
 ];
 
-async function generateFilmed(){
-  var concept=document.getElementById('filmConcept').value.trim();
-  if(!concept){
-    document.getElementById('outputWrapFilmed').style.display='block';
-    document.getElementById('filmedOut').innerHTML='<div class="error-box">Please describe your video first.</div>';
+async function generateFilmed() {
+  var concept = document.getElementById('filmConcept').value.trim();
+  if (!concept) {
+    document.getElementById('outputWrapFilmed').style.display = 'block';
+    document.getElementById('filmedOut').innerHTML = '<div class="error-box">Please describe your video first.</div>';
     return;
   }
-  var gb=document.getElementById('genBtnFilmed');
-  gb.disabled=true;gb.textContent='Generating...';
-  document.getElementById('outputWrapFilmed').style.display='block';
-  document.getElementById('filmedOut').innerHTML='<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  var gb = document.getElementById('genBtnFilmed');
+  gb.disabled = true; gb.textContent = 'Generating...';
+  document.getElementById('outputWrapFilmed').style.display = 'block';
+  document.getElementById('filmedOut').innerHTML = '<div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
 
-  var sys='You are an elite viral short-form content strategist for TikTok and Instagram Reels in 2026. Your signature move: you find the most unexpected, weirdly specific detail in a video and make it the hook — because specificity stops the scroll and makes people send it to friends. The best hooks feel slightly absurd AND completely true — that combination is what creates cognitive dissonance the brain needs to resolve by watching. Example of perfect hook energy: "chicken broth reveals everything about wealth 💀" — sounds insane out of context, completely true in context. That is the formula. Generic = invisible. Weird + true + specific = viral. Shares via DM are the #1 ranking signal in 2026. Instagram capped hashtags at 5, niche-specific only, NO #fyp #viral. TikTok scans on-screen text as SEO — hooks must also work as search terms. STATEMENTS stop scrolls — question marks make hooks feel weak, never use them.';
+  var sys = 'You are an elite viral short-form content strategist for TikTok and Instagram Reels in 2026. Your signature move: you find the most unexpected, weirdly specific detail in a video and make it the hook — because specificity stops the scroll and makes people send it to friends. The best hooks feel slightly absurd AND completely true — that combination is what creates cognitive dissonance the brain needs to resolve by watching. Generic = invisible. Weird + true + specific = viral. Shares via DM are the #1 ranking signal in 2026. Instagram capped hashtags at 5, niche-specific only, NO #fyp #viral. TikTok scans on-screen text as SEO — hooks must also work as search terms. STATEMENTS stop scrolls — question marks make hooks feel weak, never use them.';
 
-  var usr='I have already filmed this video. Study the concept carefully and find the most unexpected, specific, slightly absurd detail buried in it — then build hooks FROM that detail, not from the general topic.\n\nVIDEO CONCEPT:\n'+concept+'\n\nStep 1 (internal only, do not output): What is the single most specific detail in this video that sounds absurd in isolation but is completely true in context? That is your anchor. Build from there.\n\nStep 2: Write 5 text-on-screen hooks using that energy.\n\nRULES for every hook:\n- 4-5 words only (strict — count every word)\n- Exactly 1 emoji\n- Must be a statement — NO question marks, ever\n- Sounds slightly absurd or counterintuitive out of context, but completely true in context\n- Creates an open loop — viewer MUST watch to resolve it\n- Do NOT describe what the video shows — make them curious ABOUT it from an unexpected angle\n- Ask yourself: what two things in this video would nobody expect to be connected?\n\nRULES for every caption:\n- 1-2 sentences MAX — the way someone texts a friend, not writes a blog\n- Must NOT repeat any word from its paired hook — hook opens the loop, caption closes it from a completely different angle\n- If the video involves a move, transition, journey or "what happens next" — tease it. That is what converts viewers into followers.\n- Ends with an emoji\n- No corporate speak, no "I"\n\nHASHTAGS: exactly 5, niche-specific per hook\n\nOutput EXACTLY this format, no preamble, no extra commentary:\n\nHOOK 1 — CONTRARIAN:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 2 — CURIOSITY:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 3 — IDENTITY:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 4 — TRANSFORMATION:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 5 — PATTERN INTERRUPT:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]';
+  var usr = 'I have already filmed this video. Study the concept carefully and find the most unexpected, specific, slightly absurd detail buried in it — then build hooks FROM that detail.\n\nVIDEO CONCEPT:\n' + concept + '\n\nWrite 5 text-on-screen hooks.\n\nRULES:\n- 4-5 words only (strict)\n- Exactly 1 emoji\n- Statement only — NO question marks\n- Sounds slightly absurd out of context, completely true in context\n- Creates an open loop viewer MUST watch to resolve\n\nCaption rules:\n- 1-2 sentences MAX, texts-a-friend tone\n- Must NOT repeat words from paired hook\n- Ends with emoji\n\nHASHTAGS: exactly 5, niche-specific per hook\n\nOutput EXACTLY:\n\nHOOK 1 — CONTRARIAN:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 2 — CURIOSITY:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 3 — IDENTITY:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 4 — TRANSFORMATION:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]\n\nHOOK 5 — PATTERN INTERRUPT:\n[hook]\nCAPTION: [caption]\nHASHTAGS: [#tag1 #tag2 #tag3 #tag4 #tag5]';
 
-  try{
-    var text=await callClaude(sys,usr,1200);
-    lastFilmedOutput=text;
+  try {
+    var text = await callClaude(sys, usr, 1200);
+    lastFilmedOutput = text;
     renderFilmedOutput(text);
-  }catch(e){
-    document.getElementById('filmedOut').innerHTML='<div class="error-box">Something went wrong: '+e.message+'. Please try again.</div>';
+  } catch(e) {
+    document.getElementById('filmedOut').innerHTML = '<div class="error-box">Something went wrong: ' + e.message + '. Please try again.</div>';
   }
-  gb.disabled=false;gb.textContent='🎬 Generate my hook options';
+  gb.disabled = false; gb.textContent = '🎬 Generate my hook options';
 }
 
-function renderFilmedOutput(text){
-  parsedHooks=[];
-  // Parse each HOOK block
-  var angleKeys=ANGLES.map(function(a){return a.key;});
-
-  ANGLES.forEach(function(angle,idx){
-    // Match the block for this angle
-    var nextKey=ANGLES[idx+1]?ANGLES[idx+1].key:'$$$ENDOFSTRING$$$';
-    var rx=new RegExp('HOOK\\s*'+(idx+1)+'\\s*[—\\-]+\\s*'+angle.key+':\\s*([\\s\\S]*?)(?=HOOK\\s*'+(idx+2)+'\\s*[—\\-]|$)','i');
-    var m=text.match(rx);
-    if(!m)return;
-    var block=m[1];
-
-    // Extract hook text (first non-empty line before CAPTION:)
-    var hookLineMatch=block.match(/^([^\n]+)/);
-    var hookText=hookLineMatch?hookLineMatch[1].trim():'';
-
-    // Extract caption
-    var captionMatch=block.match(/CAPTION:\s*([^\n]+(?:\n(?!HASHTAGS:)[^\n]+)*)/i);
-    var caption=captionMatch?captionMatch[1].trim():'';
-
-    // Extract hashtags
-    var hashMatch=block.match(/HASHTAGS:\s*([^\n]+)/i);
-    var hashtags=hashMatch?hashMatch[1].trim():'';
-
-    if(hookText){
-      parsedHooks.push({angle:angle.label,hook:hookText,caption:caption,hashtags:hashtags,idx:idx});
-    }
+function renderFilmedOutput(text) {
+  parsedHooks = [];
+  ANGLES.forEach(function(angle, idx) {
+    var rx = new RegExp('HOOK\\s*' + (idx + 1) + '\\s*[—\\-]+\\s*' + angle.key + ':\\s*([\\s\\S]*?)(?=HOOK\\s*' + (idx + 2) + '\\s*[—\\-]|$)', 'i');
+    var m = text.match(rx);
+    if (!m) return;
+    var block = m[1];
+    var hookLineMatch = block.match(/^([^\n]+)/);
+    var hookText = hookLineMatch ? hookLineMatch[1].trim() : '';
+    var captionMatch = block.match(/CAPTION:\s*([^\n]+(?:\n(?!HASHTAGS:)[^\n]+)*)/i);
+    var caption = captionMatch ? captionMatch[1].trim() : '';
+    var hashMatch = block.match(/HASHTAGS:\s*([^\n]+)/i);
+    var hashtags = hashMatch ? hashMatch[1].trim() : '';
+    if (hookText) parsedHooks.push({angle: angle.label, hook: hookText, caption: caption, hashtags: hashtags, idx: idx});
   });
 
-  if(!parsedHooks.length){
-    document.getElementById('filmedOut').innerHTML='<div class="error-box">Parsing failed — please try again.</div>';
+  if (!parsedHooks.length) {
+    document.getElementById('filmedOut').innerHTML = '<div class="error-box">Parsing failed — please try again.</div>';
     return;
   }
 
-  var html='';
-  parsedHooks.forEach(function(h,i){
-    var copyText=h.hook+'\n\n'+h.caption+'\n\n'+h.hashtags;
-    var safeId='hookopt'+i;
-    html+='<div class="hook-option-card">';
-    html+='<div class="hook-num">Option '+(i+1)+' of '+parsedHooks.length+'</div>';
-    html+='<div class="hook-angle-tag">'+h.angle+'</div>';
-    html+='<div class="hook-text">'+escHtml(h.hook)+'</div>';
-    if(h.caption) html+='<div class="caption-text">'+escHtml(h.caption)+'</div>';
-    if(h.hashtags) html+='<div class="hashtag-text">'+escHtml(h.hashtags)+'</div>';
-    html+='<div id="'+safeId+'" style="display:none">'+escHtml(copyText)+'</div>';
-    html+='<button class="copy-hook-btn" onclick="copyHook(\''+safeId+'\',this)">Copy this option</button>';
-    html+='</div>';
+  var html = '';
+  parsedHooks.forEach(function(h, i) {
+    var copyText = h.hook + '\n\n' + h.caption + '\n\n' + h.hashtags;
+    var safeId = 'hookopt' + i;
+    html += '<div class="hook-option-card">';
+    html += '<div class="hook-num">Option ' + (i + 1) + ' of ' + parsedHooks.length + '</div>';
+    html += '<div class="hook-angle-tag">' + h.angle + '</div>';
+    html += '<div class="hook-text">' + escHtml(h.hook) + '</div>';
+    if (h.caption) html += '<div class="caption-text">' + escHtml(h.caption) + '</div>';
+    if (h.hashtags) html += '<div class="hashtag-text">' + escHtml(h.hashtags) + '</div>';
+    html += '<div id="' + safeId + '" style="display:none">' + escHtml(copyText) + '</div>';
+    html += '<button class="copy-hook-btn" onclick="copyHook(\'' + safeId + '\',this)">Copy this option</button>';
+    html += '</div>';
   });
-
-  document.getElementById('filmedOut').innerHTML=html;
+  document.getElementById('filmedOut').innerHTML = html;
 }
 
-function escHtml(str){
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function copyHook(id,btn){
-  var el=document.getElementById(id);
-  if(!el)return;
-  navigator.clipboard.writeText(el.textContent.trim()).then(function(){
-    var orig=btn.textContent;
-    btn.textContent='Copied!';btn.classList.add('copied');
-    setTimeout(function(){btn.textContent=orig;btn.classList.remove('copied');},2000);
+function copyAllFilmed() {
+  if (!lastFilmedOutput) return;
+  navigator.clipboard.writeText(lastFilmedOutput).then(function() {
+    var b = document.getElementById('copyBtnFilmed');
+    b.textContent = 'Copied!'; b.classList.add('copied');
+    setTimeout(function() { b.textContent = 'Copy all'; b.classList.remove('copied'); }, 2000);
   });
 }
 
-function copyAllFilmed(){
-  if(!lastFilmedOutput)return;
-  navigator.clipboard.writeText(lastFilmedOutput).then(function(){
-    var b=document.getElementById('copyBtnFilmed');
-    b.textContent='Copied!';b.classList.add('copied');
-    setTimeout(function(){b.textContent='Copy all';b.classList.remove('copied');},2000);
+function copyHook(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!'; btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
   });
 }
 
 // ─── MINI MINER ───────────────────────────────────────────────────────────────
-function openMini(){document.getElementById('miniOverlay').style.display='flex';document.getElementById('miniResults').innerHTML='';selectedMiniTake=null;}
-function closeMini(){document.getElementById('miniOverlay').style.display='none';}
-function closeMiniIfOutside(e){if(e.target===document.getElementById('miniOverlay'))closeMini();}
+function openMini() { document.getElementById('miniOverlay').style.display = 'flex'; document.getElementById('miniResults').innerHTML = ''; selectedMiniTake = null; }
+function closeMini() { document.getElementById('miniOverlay').style.display = 'none'; }
+function closeMiniIfOutside(e) { if (e.target === document.getElementById('miniOverlay')) closeMini(); }
 
-async function surfaceTakes(){
-  var q1=document.getElementById('mq1').value.trim();
-  var q2=document.getElementById('mq2').value.trim();
-  var q3=document.getElementById('mq3').value.trim();
-  if(!q1&&!q2&&!q3){document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Please answer at least one question.</div>';return;}
-  var btn=document.getElementById('surfaceBtn');
-  btn.disabled=true;btn.textContent='Surfacing...';
-  document.getElementById('miniResults').innerHTML='<div class="loading-dots" style="margin-top:16px;"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
-  try{
-    var text=await callClaude(
+async function surfaceTakes() {
+  var q1 = document.getElementById('mq1').value.trim();
+  var q2 = document.getElementById('mq2').value.trim();
+  var q3 = document.getElementById('mq3').value.trim();
+  if (!q1 && !q2 && !q3) { document.getElementById('miniResults').innerHTML = '<div class="error-box" style="margin-top:12px;">Please answer at least one question.</div>'; return; }
+  var btn = document.getElementById('surfaceBtn');
+  btn.disabled = true; btn.textContent = 'Surfacing...';
+  document.getElementById('miniResults').innerHTML = '<div class="loading-dots" style="margin-top:16px;"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  try {
+    var text = await callClaude(
       'You are a viral content strategist for spiritual entrepreneurs. Surface 3 punchy, specific hot takes. Each take: 1-2 bold sentences, first person, conversational. Format: TAKE 1: [text] TAKE 2: [text] TAKE 3: [text]',
-      'Eye roll: '+q1+'\nPrivate truth: '+q2+'\nClient pattern: '+q3+'\n\nGive me 3 hot takes I can use as Reel/TikTok content.',
-      600
+      'Eye roll: ' + q1 + '\nPrivate truth: ' + q2 + '\nClient pattern: ' + q3 + '\n\nGive me 3 hot takes I can use as Reel/TikTok content.', 600
     );
-    var takes=text.match(/TAKE \d+:\s*([^\n]+(?:\n(?!TAKE \d+:)[^\n]+)*)/gi)||[];
-    var cleaned=takes.map(function(t){return t.replace(/TAKE \d+:\s*/i,'').trim();});
-    if(!cleaned.length){
-      document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Could not surface takes — try adding more detail.</div>';
-    }else{
-      var html='<div class="take-result"><h4>Pick your hot take</h4>';
-      cleaned.forEach(function(t){
-        var safe=t.replace(/'/g,'&#39;').replace(/"/g,'&quot;');
-        html+='<div class="take-item" data-take="'+safe+'" onclick="pickMiniTake(this)">'+t+'</div>';
+    var takes = text.match(/TAKE \d+:\s*([^\n]+(?:\n(?!TAKE \d+:)[^\n]+)*)/gi) || [];
+    var cleaned = takes.map(function(t) { return t.replace(/TAKE \d+:\s*/i, '').trim(); });
+    if (!cleaned.length) {
+      document.getElementById('miniResults').innerHTML = '<div class="error-box" style="margin-top:12px;">Could not surface takes — try adding more detail.</div>';
+    } else {
+      var html = '<div class="take-result"><h4>Pick your hot take</h4>';
+      cleaned.forEach(function(t) {
+        var safe = t.replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+        html += '<div class="take-item" data-take="' + safe + '" onclick="pickMiniTake(this)">' + t + '</div>';
       });
-      html+='<button class="btn-use" id="useBtn" onclick="useMiniTake()" disabled>Use this take</button></div>';
-      document.getElementById('miniResults').innerHTML=html;
+      html += '<button class="btn-use" id="useBtn" onclick="useMiniTake()" disabled>Use this take</button></div>';
+      document.getElementById('miniResults').innerHTML = html;
     }
-  }catch(e){
-    document.getElementById('miniResults').innerHTML='<div class="error-box" style="margin-top:12px;">Something went wrong: '+e.message+'</div>';
+  } catch(e) {
+    document.getElementById('miniResults').innerHTML = '<div class="error-box" style="margin-top:12px;">Something went wrong: ' + e.message + '</div>';
   }
-  btn.disabled=false;btn.textContent='✦ Surface my hot takes';
+  btn.disabled = false; btn.textContent = '✦ Surface my hot takes';
 }
 
-function pickMiniTake(el){
-  document.querySelectorAll('.take-item').forEach(function(i){i.classList.remove('selected');});
+function pickMiniTake(el) {
+  document.querySelectorAll('.take-item').forEach(function(i) { i.classList.remove('selected'); });
   el.classList.add('selected');
-  selectedMiniTake=el.dataset.take;
-  document.getElementById('useBtn').disabled=false;
+  selectedMiniTake = el.dataset.take;
+  document.getElementById('useBtn').disabled = false;
 }
 
-function useMiniTake(){
-  if(!selectedMiniTake)return;
-  var topicEl=document.getElementById('topic');
-  if(topicEl){
-    topicEl.value=selectedMiniTake;
+function useMiniTake() {
+  if (!selectedMiniTake) return;
+  var topicEl = document.getElementById('topic');
+  if (topicEl) {
+    topicEl.value = selectedMiniTake;
     closeMini();
-    topicEl.style.borderColor='var(--pk400)';
-    setTimeout(function(){topicEl.style.borderColor='';},2000);
-    topicEl.scrollIntoView({behavior:'smooth',block:'center'});
+    topicEl.style.borderColor = 'var(--pk400)';
+    setTimeout(function() { topicEl.style.borderColor = ''; }, 2000);
+    topicEl.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
+}
+
+// ─── UTILS ────────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 renderForm();

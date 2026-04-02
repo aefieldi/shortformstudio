@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VBD Script Studio v6 — Visibility by Design</title>
+<title>Soul-Aligned Short‑Form Script Studio: TikToks & Reels — Visibility by Design</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -24,7 +24,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .badge{display:inline-block;background:var(--p50);border:1px solid var(--p200);color:var(--p600);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 16px;border-radius:100px;margin-bottom:14px;}
 h1{font-family:'Montserrat',sans-serif;font-size:clamp(22px,4.5vw,32px);font-weight:900;color:var(--tx);line-height:1.12;margin-bottom:8px;}
 h1 span{color:var(--p400);}
-.subtitle{font-size:13.5px;color:var(--txs);line-height:1.65;max-width:520px;margin:0 auto;font-weight:300;}
+.subtitle{font-size:13.5px;color:var(--txs);line-height:1.65;max-width:640px;margin:0 auto;font-weight:300;}
 
 /* MODE TABS */
 .mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;}
@@ -180,8 +180,8 @@ h1 span{color:var(--p400);}
 <div class="wrap">
   <div class="header">
     <div class="badge">✦ Visibility by Design · Day 4</div>
-    <h1>Short-Form<br><span>Script Studio</span></h1>
-    <p class="subtitle">Drop your idea. The AI reads your content, picks the optimal hook style and video length, and writes your script — zero guesswork required.</p>
+    <h1>Soul-Aligned Short‑Form<br><span>Script Studio:</span> TikToks & Reels</h1>
+    <p class="subtitle">Walk away with scroll‑stopping, soul‑aligned short‑form scripts (hooks, captions, hashtags, and filming directions) so you can create Reels or TikToks that feel authentic, easeful, and ready to post today without overthinking the algorithm or guessing what works in 2026.</p>
   </div>
 
   <div class="mode-tabs">
@@ -520,13 +520,13 @@ VISUAL DIRECTION (1-2 sentences on how to film this — environment, energy, del
     lastScriptOutput = text;
 
     // Parse strategy
-    var stratMatch = text.match(/STRATEGY:\s*([\s\S]*?)(?=TEXT OVERLAY TITLE)/i);
+    var stratMatch = text.match(/STRATEGY[:\s]*([\s\S]*?)(?=\n\s*TEXT OVERLAY|$)/i);
     var strategyBlock = stratMatch ? stratMatch[1].trim() : '';
 
     // Check if AI chose 7-15 seconds (one-liner mode)
     var lenMatch = strategyBlock.match(/LENGTH:\s*([^\n]+)/i);
     var chosenLen = lenMatch ? lenMatch[1].trim().toLowerCase() : '';
-    var isOneLiner = chosenLen.includes('7') || chosenLen.includes('15') && !chosenLen.includes('30');
+    var isOneLiner = (chosenLen.includes('7-15') || chosenLen.includes('7 -') || chosenLen.includes('7 to 15')) && !chosenLen.includes('30');
 
     renderStrategyPill(strategyBlock);
 
@@ -603,27 +603,35 @@ function renderScriptOutput(text) {
     {key: 'VISUAL DIRECTION', label: 'Visual direction', cls: 'lbl-visual'}
   ];
 
+  var terminator = '\\n\\s*(?:TEXT OVERLAY TITLE|HOOK|BODY|CTA|CAPTION|VISUAL DIRECTION)\\b[^\\n]*:';
   var html = '<div class="script-card">';
+  var found = 0;
   secs.forEach(function(s) {
-    var rx = new RegExp(s.key + '[^\\n]*:\\n([\\s\\S]*?)(?=\\n(?:TEXT OVERLAY TITLE|HOOK|BODY|CTA|CAPTION|VISUAL DIRECTION)[^\\n]*:|$)', 'i');
+    var rx = new RegExp(s.key + '\\b[^\\n]*:\\s*([\\s\\S]*?)(?=' + terminator + '|\\s*$)', 'i');
     var m = text.match(rx);
     var c = m ? m[1].trim() : '';
-    if (c) html += '<div class="script-seg"><div class="seg-label ' + s.cls + '">' + s.label + '</div><div class="seg-text">' + escHtml(c) + '</div></div>';
+    if (c) {
+      found++;
+      html += '<div class="script-seg"><div class="seg-label ' + s.cls + '">' + s.label + '</div><div class="seg-text">' + escHtml(c) + '</div></div>';
+    }
   });
   html += '</div>';
+  if (!found) {
+    html = '<div class="script-card"><div class="script-seg"><div class="seg-label lbl-body">Your script</div><div class="seg-text">' + escHtml(text.replace(/^STRATEGY[\s\S]*?(?=TEXT OVERLAY|HOOK|$)/i, '').trim()) + '</div></div></div>';
+  }
   document.getElementById('scriptOut').innerHTML = html;
 }
 
 // ─── RENDER ONE-LINERS ────────────────────────────────────────────────────────
 function renderOneLiners(text) {
-  var blocks = text.split(/VARIATION \d+:/i).filter(function(b) { return b.trim(); });
+  var blocks = text.split(/\*{0,2}VARIATION\s*\d+\s*\*{0,2}\s*[:\-—]?\s*/i).filter(function(b) { return b.trim(); });
   var variations = [];
 
   blocks.forEach(function(block) {
-    var flavor = (block.match(/FLAVOR:\s*([^\n]+)/i) || [])[1];
-    var spoken = (block.match(/SPOKEN LINE:\s*([^\n]+)/i) || [])[1];
-    var overlay = (block.match(/TEXT OVERLAY:\s*([^\n]+)/i) || [])[1];
-    var delivery = (block.match(/DELIVERY NOTE:\s*([^\n]+)/i) || [])[1];
+    var flavor = (block.match(/FLAVOR[:\s]+([^\n]+)/i) || [])[1];
+    var spoken = (block.match(/SPOKEN\s*LINE[:\s]+([^\n]+)/i) || [])[1];
+    var overlay = (block.match(/TEXT\s*OVERLAY[:\s]+([^\n]+)/i) || [])[1];
+    var delivery = (block.match(/DELIVERY\s*(?:NOTE)?[:\s]+([^\n]+)/i) || [])[1];
     if (spoken) variations.push({
       flavor: (flavor || '').trim(),
       spoken: spoken.trim(),
@@ -714,15 +722,18 @@ async function generateFilmed() {
 function renderFilmedOutput(text) {
   parsedHooks = [];
   ANGLES.forEach(function(angle, idx) {
-    var rx = new RegExp('HOOK\\s*' + (idx + 1) + '\\s*[—\\-]+\\s*' + angle.key + ':\\s*([\\s\\S]*?)(?=HOOK\\s*' + (idx + 2) + '\\s*[—\\-]|$)', 'i');
+    // Flexible: match HOOK N with any separator (dash, em-dash, colon, space) then optional angle label
+    var rx = new RegExp('HOOK\\s*' + (idx + 1) + '\\s*[—\\-:]*\\s*(?:' + angle.key.replace(/\s+/g, '\\s*') + ')?[:\\s]*([\\s\\S]*?)(?=HOOK\\s*' + (idx + 2) + '\\b|$)', 'i');
     var m = text.match(rx);
     if (!m) return;
-    var block = m[1];
+    var block = m[1].trim();
     var hookLineMatch = block.match(/^([^\n]+)/);
     var hookText = hookLineMatch ? hookLineMatch[1].trim() : '';
-    var captionMatch = block.match(/CAPTION:\s*([^\n]+(?:\n(?!HASHTAGS:)[^\n]+)*)/i);
+    // Strip any leftover angle label from hook text
+    hookText = hookText.replace(/^(CONTRARIAN|CURIOSITY|IDENTITY|TRANSFORMATION|PATTERN\s*INTERRUPT)[:\s]*/i, '').trim();
+    var captionMatch = block.match(/CAPTION[:\s]*([^\n]+(?:\n(?!HASHTAGS)[^\n]+)*)/i);
     var caption = captionMatch ? captionMatch[1].trim() : '';
-    var hashMatch = block.match(/HASHTAGS:\s*([^\n]+)/i);
+    var hashMatch = block.match(/HASHTAGS?[:\s]*([^\n]+)/i);
     var hashtags = hashMatch ? hashMatch[1].trim() : '';
     if (hookText) parsedHooks.push({angle: angle.label, hook: hookText, caption: caption, hashtags: hashtags, idx: idx});
   });
